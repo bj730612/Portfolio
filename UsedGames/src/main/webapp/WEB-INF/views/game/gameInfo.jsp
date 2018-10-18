@@ -29,6 +29,7 @@
 	<div style="position: relative; z-index: 1; padding-top: 160px;">
 		<c:forEach var="gameVO" items="${gameVOs}">
 			<p>${gameVO.idx}</p>
+			<p>${gameVO.title}</p>
 		</c:forEach>
 	</div>
 </body>
