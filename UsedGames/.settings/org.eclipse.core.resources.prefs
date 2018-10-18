@@ -1,0 +1,8 @@
+eclipse.preferences.version=1
+encoding//src/main/java/org/zerock/persistence/GameDAO.java=UTF-8
+encoding//src/main/java/org/zerock/persistence/GameDAOImpl.java=UTF-8
+encoding//src/main/java/org/zerock/service/GameService.java=UTF-8
+encoding//src/main/java/org/zerock/service/GameServiceImpl.java=UTF-8
+encoding//src/main/java/org/zerock/web/CommentController.java=UTF-8
+encoding//src/main/java/org/zerock/web/GameController.java=UTF-8
+encoding//src/main/java/org/zerock/web/HomeController.java=UTF-8
