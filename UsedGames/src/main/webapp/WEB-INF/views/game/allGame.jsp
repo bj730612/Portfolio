@@ -41,7 +41,6 @@
 	</div>
 	
 	<p>할인 상품</p>
-	
 	<div class="row">
 		<ul id="flexiselDemo5">
 			<c:forEach var="gameVO" items="${gameVOs}">
