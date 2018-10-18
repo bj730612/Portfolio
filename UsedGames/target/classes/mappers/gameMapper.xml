@@ -69,5 +69,4 @@
 			 inner join board b on a.board_idx = b.idx
 		where a.idx = #{idx}
 	</select>
-
 </mapper>
