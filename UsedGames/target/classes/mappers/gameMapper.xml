@@ -33,7 +33,7 @@
 		select * from category3
 	</select>
 	
-	<select id="categoryGameList" resultType="gameVO">
+	<select id="categoryGameList" resultType="map">
 		select a.idx
 			 , a.title
 			 , a.price

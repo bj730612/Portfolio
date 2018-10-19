@@ -13,7 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.zerock.domain.CommentVO;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.zerock.domain.GameVO;
 import org.zerock.service.GameService;
 
@@ -51,12 +51,13 @@ public class GameController {
 	@RequestMapping(value="/gameInfo.do", method=RequestMethod.GET)
 	public void gameInfo(Model model, @RequestParam("idx") int idx) throws Exception {
 		
-		model.addAttribute("gameVOs", gameService.gameInfo(idx));
+		model.addAttribute(gameService.gameInfo(idx));
 	}
-
+	
+	@ResponseBody
 	@RequestMapping(value="/categoryList.do", method=RequestMethod.GET)
-	public void categoryList(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("1");
+	public GameVO categoryList(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		GameVO gameVO = new GameVO();
 		
 		String resultStr = "";
@@ -66,28 +67,28 @@ public class GameController {
 		
 		gameVO.setDevice_idx(deviceIdxList);
 		gameVO.setType_idx(typeIdxList);
-		
-		List list = (List)gameService.categoryGameList(gameVO);
-		
-		for (int i = 0; i < list.size(); i++) {
-			Map tmp_map = (Map) list.get(i);
-			String name = (String) tmp_map.get("name");
-			String title = (String) tmp_map.get("title");
-			String image = (String) tmp_map.get("image");
-			int price = (int) tmp_map.get("price");
-			//int viewcount = (int) tmp_map.get("viewcount");
 
-			if (i == 0) {
-				resultStr += name + "&" + title + "&" + image + "&" + price;// + "&" + viewcount;
-			}
-			else {
-				resultStr += "," + name + "&" + title + "&" + image + "&" + price;// + "&" + viewcount;
-			}
-		}
-
-		response.setContentType("text/json");
-		response.setCharacterEncoding("UTF-8");
-		PrintWriter writer = response.getWriter();
-		writer.print(resultStr);
+//		List list = (List)gameService.categoryGameList(gameVO);
+//
+//		for (int i = 0; i < list.size(); i++) {
+//			Map tmp_map = (Map) list.get(i);
+//			String title = (String) tmp_map.get("title");
+//			String image = (String) tmp_map.get("image");
+//			int price = (Integer) tmp_map.get("price");
+//			int view_count = (Integer) tmp_map.get("view_count");
+//
+//			if (i == 0) {
+//				resultStr += title + "&" + image + "&" + price + "&" + view_count;
+//			}
+//			else {
+//				resultStr += "," + title + "&" + image + "&" + price + "&" + view_count;
+//			}
+//		}
+//
+//		response.setContentType("text/json");
+//		response.setCharacterEncoding("UTF-8");
+//		PrintWriter writer = response.getWriter();
+//		writer.print(resultStr);
+		return gameVO;
 	}
 }

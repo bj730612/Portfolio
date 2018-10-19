@@ -9,24 +9,7 @@
 <link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/bootstrap.css">
 </head>
 <body>
-<script>
-function () {
 
-	$.ajax({
-		url : "/game/categoryList.do",
-		type : "POST",
-		data : null,
-		async : false,
-		dataType : "JSON",
-		success : function(data) {
-			alert(data);
-		},
-		error : function() {
-			alert("error");
-		}
-	});
-}
-</script>
 <h4>test</h4>
 <hr>
 <hr>
@@ -40,5 +23,24 @@ function () {
 <hr>
 <hr>
 <hr>
+<script type="text/javascript" src="https://unpkg.com/jquery@3.3.1/dist/jquery.js"></script>
+<script>
+
+
+	$.ajax({
+		url : "/game/categoryList.do",
+		type : "GET",
+		data : null,
+		async : false,
+		dataType : "JSON",
+		success : function(data) {
+			alert(data);
+		},
+		error : function() {
+			alert("error");
+		}
+	});
+
+</script>
 </body>
 </html>

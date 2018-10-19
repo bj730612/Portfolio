@@ -27,10 +27,30 @@
 </header>
 <body style="margin: auto; width: 900px;">
 	<div style="position: relative; z-index: 1; padding-top: 160px;">
-		<c:forEach var="gameVO" items="${gameVOs}">
-			<p>${gameVO.idx}</p>
-			<p>${gameVO.title}</p>
-		</c:forEach>
+		<div>
+			<img>
+			<div>
+				<div>
+					<p>title</p>
+				</div>
+				<div>
+					<p>price</p>
+				</div>
+				<div>
+					<button>장바구니</button>
+					<button>구매하기</button>
+				</div>
+			</div>
+		<p>${gameVO.title}</p>
+		<p>${gameVO.price}</p>
+		</div>
+		<div>
+			<img>
+		</div>
+		<div class="상품평">			
+		</div>
+		<div class="상품문의">
+		</div>
 	</div>
 </body>
 <c:import url="/footer.do"></c:import>
