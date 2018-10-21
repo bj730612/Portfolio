@@ -14,15 +14,16 @@ public class CommentServiceImpl implements CommentService {
 	@Inject
 	private CommentDAO commentDAO;
 	
-	//댓글 생성
+	//�뙎湲� �깮�꽦
 	@Override
 	public void insertComment(CommentVO commentVO) throws Exception {
 		commentDAO.insertComment(commentVO);
 	}
 		
-	//댓글 리스트
+	//�뙎湲� 由ъ뒪�듃
 	@Override
 	public List<CommentVO> selectComment(int boardIdx) throws Exception {	
 		return commentDAO.selectComment(boardIdx);
 	}
+	
 }

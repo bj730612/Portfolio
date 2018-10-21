@@ -48,7 +48,7 @@ public class CommentController{
 	}
 	
 	//�뙎湲� 由ъ뒪�듃 
-	@RequestMapping(value="/selectComment.do", method=RequestMethod.GET, produces="application/json; charset=utf8")
+	@RequestMapping(value="/selectComment.do", method=RequestMethod.GET, produces = "application/text; charset=utf8")
 	@ResponseBody
 	public ResponseEntity selectComment(@RequestParam("boardIdx") int boardIdx,  HttpServletRequest request) throws Exception {
 		
@@ -70,5 +70,5 @@ public class CommentController{
         
         JSONArray json = new JSONArray(hmlist);
         return new ResponseEntity(json.toString(), responseHeaders, HttpStatus.CREATED);
-	}	
+	}
 }

@@ -38,28 +38,25 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		HttpSession session = request.getSession();
 		
-		//로그인 없이 페이지 이동시
+		//濡쒓렇�씤 �뾾�씠 �럹�씠吏� �씠�룞�떆
 		if(session.getAttribute("login") == null) {
 			
 			String url = saveDest(request);
 			
 			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
 			
-			//자동 로그인 쿠키 유무 확인
+			//�옄�룞 濡쒓렇�씤 荑좏궎 �쑀臾� �솗�씤
 			if(loginCookie != null) {
-				System.out.println("1");
 				UserVO userVO = userService.checkLoginBefore(loginCookie.getValue());
 				
-				//유저 정보 유무 확인
+				//�쑀�� �젙蹂� �쑀臾� �솗�씤
 				if(userVO != null) {
-					System.out.println("2");
 					session.setAttribute("login", userVO);
 					
-					// 접속한 페이지 확인
+					// �젒�냽�븳 �럹�씠吏� �솗�씤
 					if(url.equals("/main.do")) {
 						return true;
 					}else {
-						System.out.println("3");
 						return false;
 					}
 				}
@@ -67,7 +64,6 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			if(url.equals("/main.do")) {
 				return true;
 			}else {
-				System.out.println("4");
 				response.sendRedirect("/user/login.do");
 				return false;
 			}

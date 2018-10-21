@@ -16,15 +16,16 @@ public class CommentDAOImpl implements CommentDAO{
 	
 	private static final String namespace = "org.zerock.mapper.CommentMapper";
 	
-	//댓글 생성
+	//�뙎湲� �깮�꽦
 	@Override
 	public void insertComment(CommentVO commnetVO) throws Exception {
 		sqlSession.insert(namespace+".insertComment", commnetVO);
 	}
 	
-	//댓글 리스트
+	//�뙎湲� 由ъ뒪�듃
 	@Override
 	public List<CommentVO> selectComment(int boardIdx) throws Exception {
 		return sqlSession.selectList(namespace+".selectComment", boardIdx);
 	}
+	
 }

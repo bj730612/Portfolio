@@ -27,11 +27,13 @@
 </header>
 <body style="margin: auto; width: 900px;">
 	<div style="position: relative; z-index: 1; padding-top: 160px;">
-		<div>
-			<img>
+		<div class="d-flex">
+			<div class="d-inline">
+				<img src="/resources/uploadFile/image/${gameVO.image}">
+			</div>
 			<div>
 				<div>
-					<p>title</p>
+					<p>${gameVO.title}</p>
 				</div>
 				<div>
 					<p>price</p>
@@ -41,15 +43,16 @@
 					<button>구매하기</button>
 				</div>
 			</div>
-		<p>${gameVO.title}</p>
-		<p>${gameVO.price}</p>
 		</div>
 		<div>
-			<img>
+<%-- 			<img src="/resources/uploadFile/image/${gameVO.subImage}"> --%>
+			<p>상세 정보</p>
 		</div>
-		<div class="상품평">			
+		<div>
+			<p>상품평</p>
 		</div>
-		<div class="상품문의">
+		<div>
+			<p>상품문의</p>
 		</div>
 	</div>
 </body>

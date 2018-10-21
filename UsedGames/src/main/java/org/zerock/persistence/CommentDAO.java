@@ -6,10 +6,10 @@ import org.zerock.domain.CommentVO;
 
 public interface CommentDAO {
 	
-	// 댓글 생성
+	// �뙎湲� �깮�꽦
 	public void insertComment(CommentVO commentVO) throws Exception;
 	
-	// 댓글 리스트
+	// �뙎湲� 由ъ뒪�듃
 	public List<CommentVO> selectComment(int boardIdx) throws Exception;
 
 }
