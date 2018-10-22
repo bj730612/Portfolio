@@ -39,8 +39,18 @@
 					<p>${gameVO.price}</p>
 				</div>
 				<div>
-					<button>장바구니</button>
-					<button>구매하기</button>
+					<form name="form1" method="get" action="/user/cartList.do">
+						<input type="hidden" name="gameIdx" value="${gameVO.idx}">
+						<select name="quantity">
+							<c:forEach begin="1" end="10" var="i">
+								<option value="${i}">${i}</option>
+							</c:forEach>
+						</select>&nbsp;개
+						<input type="submit" value="장바구니">
+					</form>
+					<form name="form2" method="get" action="/user/insertOrder.do">
+						<input type="submit" value="주문하기">
+					</form>
 				</div>
 			</div>
 		</div>

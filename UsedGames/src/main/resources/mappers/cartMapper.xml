@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.mapper.CartMapper">
+
+    <!-- 1. 장바구니 추가 -->
+    <insert id="insertCart">
+        INSERT INTO cart(
+            user_idx, game_idx, board_idx, quantity
+        ) VALUES (
+            #{userIdx}, #{gameIdx}, #{boardIdx}, #{quantity}
+        )
+    </insert>
+    
+    <!-- 2. 장바구니 목록 -->
+    <select id="listCart" resultType="CartVO">
+        SELECT
+            c.idx AS cartIdx, 
+            c.user_idx AS userIdx,
+            c.game_idx As gameIdx,
+            g.title AS gameTitle, 
+            c.quantity, 
+            g.price AS price, 
+            (gamePrice * quantity) cost
+        FROM
+            game g, cart c, user u
+        WHERE u.user_idx = c.user_idx
+            AND g.game_idx = c.game_idx
+            AND c.user_idx = #{userIdx}
+        ORDER BY
+            c.idx
+    </select>
+    
+    <!-- 3. 장바구니 전체 금액 -->
+    <select id="sumCost" resultType="int">
+        SELECT NVL(SUM(g.price * quantity), 0) cost
+        FROM cart c, game g
+        WHERE c.game_idx = g.game_idx AND c.user_idx = #{userIdx}
+    </select>
+    
+    <!-- 4. 장바구니 수정 -->
+    <update id="updateCart">
+        UPDATE cart    
+        SET quantity = #{quantity} 
+        WHERE user_idx= #{userIdx} 
+        AND game_idx = #{gameIdx}
+    </update>
+    
+    <!-- 5. 장바구니 삭제 -->
+    <delete id="deleteCart">
+        DELETE FROM cart 
+        WHERE cart_idx = #{cartIdx}
+    </delete>
+    
+    <!-- 6. 장바구니에 동일한 상품 레코드 확인 -->
+    <select id="countCart" resultType="int">
+        SELECT COUNT(*)
+        FROM cart
+        WHERE user_idx= #{userIdx} 
+        AND game_idx = #{gameIdx}
+    </select>
+    
+    <!-- 7. 장바구니에 동일한 상품이 존재하면 수정 -->
+    <update id="changeCart">
+        UPDATE cart 
+        SET quantity = quantity + #{quantity} 
+        WHERE user_idx= #{userIdx} 
+        AND game_idx = #{gameIdx}
+    </update>
+</mapper>

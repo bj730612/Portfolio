@@ -8,17 +8,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css"
 	href="/resources/bootstrap/css/bootstrap.css">
 </head>
@@ -28,6 +20,55 @@
 	</div>
 </header>
 <body style="margin: auto; width: 900px;">
+    <h2>장바구니 확인</h2>
+    <c:choose>
+        <c:when test="${map.count == 0}">
+            장바구니가 비어있습니다.
+        </c:when>
+        <c:otherwise>
+        <form name="form1" id="form1" method="get" action="/cart/updateCart.do">
+            <table border="1">
+                <tr>
+                    <th>상품명</th>
+                    <th>단가</th>
+                    <th>수량</th>
+                    <th>금액</th>
+                    <th>취소</th>
+                </tr>
+                <c:forEach var="cartVOs" items="${cartVOs}" varStatus="i">
+                <tr>
+                    <td>
+                        ${cartVO.gameTitle}
+                    </td>
+                    <td style="width: 80px" align="right">
+                        <fmt:formatNumber pattern="###,###,###" value="${cartVOs.price}"/>
+                    </td>
+                    <td>
+                        <input type="number" style="width: 40px" name="quantity" value="${cartVOs.quantity}" min="1">
+                        <input type="hidden" name="gameId" value="${cartVOs.gameIdx}">
+                    </td>
+                    <td style="width: 100px" align="right">
+                        <fmt:formatNumber pattern="###,###,###" value="${cartVOs.cost}"/>
+                    </td>
+                    <td>
+                        <a href="/cart/deleteCart.do?cartIdx=${cartVOs.cartIdx}">삭제</a>
+                    </td>
+                </tr>
+                </c:forEach>
+                <tr>
+                    <td colspan="5" align="right">
+                        장바구니 금액 합계 : <fmt:formatNumber pattern="###,###,###" value="${map.sumCost}"/><br>
+                        배송료 : ${map.fee}<br>
+                        전체 주문금액  :<fmt:formatNumber pattern="###,###,###" value="${map.allSum}"/>
+                    </td>
+                </tr>
+            </table>
+            <input type="hidden" name="count" value="${map.count}">
+            <button type="submit" id="btnUpdate">수정</button>
+        </form>
+        </c:otherwise>
+    </c:choose>
+    <button type="button" id="btnList">상품목록</button>
 	<div>
 		<p>장바구니</p>
 		<table class="table">
@@ -72,5 +113,13 @@
 	</ul>
 
 	<a href="/main.do"><button type="button">메인으로</button></a>
+<script>
+   $(document).ready(function(){
+       // 리스트 페이지로 이동
+       $("#btnList").click(function(){
+           location.href="/user/cartList.do";
+       });
+   });
+</script>
 </body>
 </html>
