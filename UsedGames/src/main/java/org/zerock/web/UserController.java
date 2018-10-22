@@ -10,10 +10,16 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
+import org.zerock.domain.CartVO;
 import org.zerock.domain.LoginDTO;
+import org.zerock.domain.PageMaker;
+import org.zerock.domain.SearchVO;
 import org.zerock.domain.UserVO;
 import org.zerock.persistence.UserDAO;
 import org.zerock.service.UserService;
@@ -101,5 +107,45 @@ public class UserController {
 			}
 		}
 		return "/user/logout";
+	}
+	
+	//게시글 리스트
+	@RequestMapping(value="/cartList.do", method=RequestMethod.GET)
+	public void listAll(SearchVO cri, Model model) throws Exception {
+		
+		PageMaker pm = new PageMaker();
+		
+		model.addAttribute("carts", userService.listCriteria(cri));
+		pm.setCri(cri);
+		pm.setTotalCount(userService.listCountCriteria(cri));
+		
+		model.addAttribute("pm", pm);
+	}
+	
+	//게시글 삭제
+	@RequestMapping(value="/deleteCart.do", method=RequestMethod.POST)
+	public String deleteCart(@RequestParam("idx") int idx, RedirectAttributes rttr) throws Exception {
+		
+		//게시글 삭제 후 "SUCCESS메세지 보내기
+		userService.deleteCart(idx);
+		rttr.addFlashAttribute("msg", "SUCCESS");
+		
+		return "redirect:/user/cartList.do";
+	}
+	
+	//게시글 수정
+	@RequestMapping(value="/updateCart.do", method=RequestMethod.GET)
+	public void updateCart(@RequestParam("idx") int idx, Model model) throws Exception {
+		
+		model.addAttribute(userService.readCart(idx));
+	}
+	
+	@RequestMapping(value="/updateCart.do", method=RequestMethod.POST)
+	public String updateCart(CartVO cartVO, RedirectAttributes rttr) throws Exception {
+		
+		userService.updateCart(cartVO);
+		rttr.addFlashAttribute("msg", "SUCCESS");
+		
+		return "redirect:/user/cartList.do";
 	}
 }

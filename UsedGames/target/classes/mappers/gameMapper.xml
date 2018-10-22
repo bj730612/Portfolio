@@ -12,8 +12,17 @@
 	
 <!-- 게임 리스트 -->
 	<select id="selectAllGame" resultType="GameVO">
-		select g.idx, g.title, g.price, b.content, b.view_count, b.image, u.name
-			from game g, game_type t, board b, user u
+		select g.idx
+			 , g.title
+			 , g.price
+			 , b.content
+			 , b.view_count
+			 , b.image
+			 , u.name
+			from game g
+			   , game_type t
+			   , board b
+			   , user u
 			where g.idx = t.game_idx and b.idx = g.board_idx and u.idx = b.user_idx
 			group by g.title
 			order by g.idx desc
@@ -64,6 +73,7 @@
 			 , a.board_idx
 			 , b.view_count
 			 , b.image
+			 , b.sub_image
 			 , b.content
 		from game a
 			 inner join board b on a.board_idx = b.idx

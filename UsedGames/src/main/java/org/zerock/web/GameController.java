@@ -62,11 +62,11 @@ public class GameController {
 		
 		String resultStr = "";
 		
-		String deviceIdxList = request.getParameter("device_idx");
-		String typeIdxList = request.getParameter("type_idx");
+		String deviceIdxList = request.getParameter("deviceIdx");
+		String typeIdxList = request.getParameter("typeIdx");
 		
-		gameVO.setDevice_idx(deviceIdxList);
-		gameVO.setType_idx(typeIdxList);
+		gameVO.setDeviceIdx(deviceIdxList);
+		gameVO.setTypeIdx(typeIdxList);
 
 //		List list = (List)gameService.categoryGameList(gameVO);
 //
@@ -75,13 +75,13 @@ public class GameController {
 //			String title = (String) tmp_map.get("title");
 //			String image = (String) tmp_map.get("image");
 //			int price = (Integer) tmp_map.get("price");
-//			int view_count = (Integer) tmp_map.get("view_count");
+//			int viewCount = (Integer) tmp_map.get("viewCount");
 //
 //			if (i == 0) {
-//				resultStr += title + "&" + image + "&" + price + "&" + view_count;
+//				resultStr += title + "&" + image + "&" + price + "&" + viewCount;
 //			}
 //			else {
-//				resultStr += "," + title + "&" + image + "&" + price + "&" + view_count;
+//				resultStr += "," + title + "&" + image + "&" + price + "&" + viewCount;
 //			}
 //		}
 //

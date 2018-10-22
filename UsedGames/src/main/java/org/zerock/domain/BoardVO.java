@@ -9,6 +9,7 @@ public class BoardVO {
 	private String content;
 	private int viewCount;
 	private String image;
+	private String subImage;
 	private int userIdx;
 	private String name;
 	private Date writeDate;
@@ -94,6 +95,14 @@ public class BoardVO {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public String getSubImage() {
+		return subImage;
+	}
+
+	public void setSubImage(String subImage) {
+		this.subImage = subImage;
 	}
 
 	public int getUserIdx() {

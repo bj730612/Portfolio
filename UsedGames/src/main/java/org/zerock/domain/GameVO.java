@@ -8,60 +8,69 @@ public class GameVO {
 	private String content;
 	private int viewCount;
 	private String image;
+	private String subImage;
 	private String name;
-	private String company_name;
-	private String device_name;
-	private String type_name;
-	private String genre_name;
-	private String device_idx;
-	private String type_idx;
+	private String companyName;
+	private String deviceName;
+	private String typeName;
+	private String genreName;
+	private String deviceIdx;
+	private String typeIdx;
 	
-	public String getDevice_idx() {
-		return device_idx;
+	public String getSubImage() {
+		return subImage;
 	}
 
-	public void setDevice_idx(String device_idx) {
-		this.device_idx = device_idx;
+	public void setSubImage(String subImage) {
+		this.subImage = subImage;
 	}
 
-	public String getType_idx() {
-		return type_idx;
+	public String getCompanyName() {
+		return companyName;
 	}
 
-	public void setType_idx(String type_idx) {
-		this.type_idx = type_idx;
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 
-	public String getCompany_name() {
-		return company_name;
+	public String getDeviceName() {
+		return deviceName;
 	}
 
-	public void setCompany_name(String company_name) {
-		this.company_name = company_name;
+	public void setDeviceName(String deviceName) {
+		this.deviceName = deviceName;
 	}
 
-	public String getDevice_name() {
-		return device_name;
+	public String getTypeName() {
+		return typeName;
 	}
 
-	public void setDevice_name(String device_name) {
-		this.device_name = device_name;
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
 	}
 
-	public String getType_name() {
-		return type_name;
+	public String getGenreName() {
+		return genreName;
 	}
 
-	public void setType_name(String type_name) {
-		this.type_name = type_name;
+	public void setGenreName(String genreName) {
+		this.genreName = genreName;
 	}
 
-	public String getGenre_name() {
-		return genre_name;
+	public String getDeviceIdx() {
+		return deviceIdx;
 	}
 
-	public void setGenre_name(String genre_name) {
-		this.genre_name = genre_name;
+	public void setDeviceIdx(String deviceIdx) {
+		this.deviceIdx = deviceIdx;
+	}
+
+	public String getTypeIdx() {
+		return typeIdx;
+	}
+
+	public void setTypeIdx(String typeIdx) {
+		this.typeIdx = typeIdx;
 	}
 
 	public int getIdx() {

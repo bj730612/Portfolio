@@ -2,6 +2,7 @@ package org.zerock.persistence;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -9,6 +10,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+import org.zerock.domain.BoardVO;
+import org.zerock.domain.CartVO;
+import org.zerock.domain.Criteria;
 import org.zerock.domain.LoginDTO;
 import org.zerock.domain.UserVO;
 
@@ -50,5 +54,47 @@ public class UserDAOImpl  implements UserDAO {
 	@Override
 	public UserVO checkUserWithSessionKey(String value) throws Exception {
 		return sqlSession.selectOne(namespace+".checkUserWithSessionKey", value);
+	}
+	
+	// 게시글 추가
+	@Override
+	public void insertCart(CartVO cartVO) throws Exception {
+		sqlSession.insert(namespace+".insertCart", cartVO);
+	}
+	
+	// 게시글 수정
+	@Override
+	public void updateCart(CartVO cartVO) throws Exception {
+		sqlSession.update(namespace + ".updateCart", cartVO);
+	}
+
+	// 게시글 삭제
+	@Override
+	public void deleteCart(int idx) throws Exception {
+		sqlSession.delete(namespace + ".deleteCart", idx);
+	}
+
+	//게시글 조회
+	@Override
+	public CartVO readCart(int idx) throws Exception {
+		return sqlSession.selectOne(namespace + ".readCart", idx);
+	}
+	
+	//게시글 리스트
+	@Override
+	public List<CartVO> listCriteria(Criteria cri) throws Exception {
+		return sqlSession.selectList(namespace+".listCriteria", cri);
+	}
+	
+	//게시글 카운트
+	@Override
+	public int countPaging(Criteria cri) throws Exception {
+		return sqlSession.selectOne(namespace+".countPaging", cri);
+	}
+	
+	// 게시글 조회수
+	@Override
+	public int viewCount(int idx) throws Exception {
+		return sqlSession.update(namespace + ".viewCount", idx);
 	}
 }

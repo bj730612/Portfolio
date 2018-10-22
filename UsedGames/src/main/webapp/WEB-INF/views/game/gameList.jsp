@@ -9,38 +9,37 @@
 <link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/bootstrap.css">
 </head>
 <body>
-
-<h4>test</h4>
-<hr>
-<hr>
-<hr>
-<c:forEach var="gameCategories" items="${gameCategories}">
-	<div>${gameCategories.name}</div>
-</c:forEach>
-<c:forEach var="gameCategory2s" items="${gameCategory2s}">
-	<div>${gameCategory2s.name}</div>
-</c:forEach>
-<hr>
-<hr>
-<hr>
-<script type="text/javascript" src="https://unpkg.com/jquery@3.3.1/dist/jquery.js"></script>
-<script>
-
-
-	$.ajax({
-		url : "/game/categoryList.do",
-		type : "GET",
-		data : null,
-		async : false,
-		dataType : "JSON",
-		success : function(data) {
-			alert(data);
-		},
-		error : function() {
-			alert("error");
-		}
-	});
-
-</script>
+	<h4>test</h4>
+	<hr>
+	<hr>
+	<hr>
+	<c:forEach var="gameCategories" items="${gameCategories}">
+		<div>${gameCategories.name}</div>
+	</c:forEach>
+	<c:forEach var="gameCategory2s" items="${gameCategory2s}">
+		<div>${gameCategory2s.name}</div>
+	</c:forEach>
+	<hr>
+	<hr>
+	<hr>
+	<script type="text/javascript" src="https://unpkg.com/jquery@3.3.1/dist/jquery.js"></script>
+	<script>
+	
+	
+		$.ajax({
+			url : "/game/categoryList.do",
+			type : "GET",
+			data : null,
+			async : false,
+			dataType : "JSON",
+			success : function(data) {
+				alert(data);
+			},
+			error : function() {
+				alert("error");
+			}
+		});
+	
+	</script>
 </body>
 </html>

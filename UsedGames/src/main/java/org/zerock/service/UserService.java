@@ -1,9 +1,13 @@
 package org.zerock.service;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.zerock.domain.BoardVO;
+import org.zerock.domain.CartVO;
+import org.zerock.domain.Criteria;
 import org.zerock.domain.LoginDTO;
 import org.zerock.domain.UserVO;
 
@@ -20,5 +24,23 @@ public interface UserService {
 
 	//세션키
 	public UserVO checkLoginBefore(String value) throws Exception;
+	
+	//장바구니 추가
+	public void insertCart(CartVO cartVO) throws Exception;
+		
+	//장바구니 수정
+	public void updateCart(CartVO cartVO) throws Exception;
+	
+	//장바구니 삭제
+	public void deleteCart(int idx) throws Exception;
+	
+	//게시글 조회
+	public CartVO readCart(int idx) throws Exception;
+	
+	//장바구니 리스트
+	public List<CartVO> listCriteria(Criteria cri) throws Exception;
+	
+	//장바구니 카운트
+	public int listCountCriteria(Criteria cri) throws Exception;
 
 }

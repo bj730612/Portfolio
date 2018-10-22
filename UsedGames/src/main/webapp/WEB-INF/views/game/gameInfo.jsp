@@ -36,7 +36,7 @@
 					<p>${gameVO.title}</p>
 				</div>
 				<div>
-					<p>price</p>
+					<p>${gameVO.price}</p>
 				</div>
 				<div>
 					<button>장바구니</button>
@@ -45,8 +45,8 @@
 			</div>
 		</div>
 		<div>
-<%-- 			<img src="/resources/uploadFile/image/${gameVO.subImage}"> --%>
 			<p>상세 정보</p>
+			<img src="/resources/uploadFile/image/${gameVO.subImage}">
 		</div>
 		<div>
 			<p>상품평</p>
