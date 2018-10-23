@@ -7,7 +7,21 @@ public class CartVO {
 	private int userIdx;
 	private int gameIdx;
 	private int boardIdx;
+	private String gameTitle;
+	private int price;
 	
+	public String getGameTitle() {
+		return gameTitle;
+	}
+	public void setGameTitle(String gameTitle) {
+		this.gameTitle = gameTitle;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
 	public int getIdx() {
 		return idx;
 	}

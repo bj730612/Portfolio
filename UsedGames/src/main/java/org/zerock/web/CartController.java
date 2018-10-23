@@ -26,10 +26,11 @@ public class CartController {
     //장바구니 추가
     @RequestMapping(value="insertCart.do", method=RequestMethod.GET)
     public String insertCart(@ModelAttribute CartVO cartVO, HttpSession session) throws Exception{
-        int userIdx = (int)session.getAttribute("userIdx");
+    	int userIdx = (int) session.getAttribute("userIdx");
         cartVO.setUserIdx(userIdx);
         // 장바구니에 기존 상품이 있는지 검사
         int count = cartService.countCart(cartVO.getGameIdx(), userIdx);
+        //count == 0 ? cartService.updateCart(cartVO) : cartService.insertCart(cartVO);
         if(count == 0){
             // 없으면 insert
             cartService.insertCart(cartVO);

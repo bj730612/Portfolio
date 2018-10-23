@@ -7,11 +7,11 @@
 
     <!-- 1. 장바구니 추가 -->
     <insert id="insertCart">
-        INSERT INTO cart(
+        INSERT INTO cart
             user_idx, game_idx, board_idx, quantity
-        ) VALUES (
+        VALUES
             #{userIdx}, #{gameIdx}, #{boardIdx}, #{quantity}
-        )
+        
     </insert>
     
     <!-- 2. 장바구니 목록 -->
@@ -23,7 +23,7 @@
             g.title AS gameTitle, 
             c.quantity, 
             g.price AS price, 
-            (gamePrice * quantity) cost
+            (price * quantity) cost
         FROM
             game g, cart c, user u
         WHERE u.user_idx = c.user_idx

@@ -39,7 +39,7 @@
 					<p>${gameVO.price}</p>
 				</div>
 				<div>
-					<form name="form1" method="get" action="/user/cartList.do">
+					<form name="form1" method="get" action="/cart/insertCart.do">
 						<input type="hidden" name="gameIdx" value="${gameVO.idx}">
 						<select name="quantity">
 							<c:forEach begin="1" end="10" var="i">
@@ -48,7 +48,7 @@
 						</select>&nbsp;개
 						<input type="submit" value="장바구니">
 					</form>
-					<form name="form2" method="get" action="/user/insertOrder.do">
+					<form name="form2" method="get" action="/order/insertOrder.do">
 						<input type="submit" value="주문하기">
 					</form>
 				</div>
@@ -59,10 +59,11 @@
 			<img src="/resources/uploadFile/image/${gameVO.subImage}">
 		</div>
 		<div>
-			<p>상품평</p>
+			<%@include file="../review/review.jsp" %>
 		</div>
 		<div>
 			<p>상품문의</p>
+<%-- 			<%@include file="../question/question.jsp" %> --%>
 		</div>
 	</div>
 </body>
