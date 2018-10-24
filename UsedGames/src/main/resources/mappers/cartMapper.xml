@@ -8,16 +8,18 @@
     <!-- 1. 장바구니 추가 -->
     <insert id="insertCart">
         INSERT INTO cart
-            user_idx, game_idx, board_idx, quantity
+            user_idx AS userIdx
+          , game_idx AS gameIdx
+          , board_idx AS boardIdx
+          , quantity
         VALUES
             #{userIdx}, #{gameIdx}, #{boardIdx}, #{quantity}
-        
     </insert>
     
     <!-- 2. 장바구니 목록 -->
     <select id="listCart" resultType="CartVO">
         SELECT
-            c.idx AS cartIdx, 
+            c.idx AS cartIdx,
             c.user_idx AS userIdx,
             c.game_idx As gameIdx,
             g.title AS gameTitle, 
@@ -58,7 +60,7 @@
     <select id="countCart" resultType="int">
         SELECT COUNT(*)
         FROM cart
-        WHERE user_idx= #{userIdx} 
+        WHERE user_idx= #{userIdx}
         AND game_idx = #{gameIdx}
     </select>
     

@@ -8,7 +8,6 @@ public class QuestionVO {
 	private int userIdx;
 	private int boardIdx;
 	private String name;
-	private String image;
 	private String comment;
 	private Date writeDate;
 	private Date updateDate;
@@ -19,14 +18,6 @@ public class QuestionVO {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-	
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
 	}
 
 	public int getIdx() {

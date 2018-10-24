@@ -71,6 +71,7 @@
 			 , a.title
 			 , a.price
 			 , a.board_idx
+			 , b.user_idx
 			 , b.view_count
 			 , b.image
 			 , b.sub_image

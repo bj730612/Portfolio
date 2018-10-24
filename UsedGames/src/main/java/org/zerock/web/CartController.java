@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.zerock.domain.CartVO;
+import org.zerock.domain.UserVO;
 import org.zerock.service.CartService;
 
 @RequestMapping("/cart")
@@ -25,12 +27,17 @@ public class CartController {
 
     //장바구니 추가
     @RequestMapping(value="insertCart.do", method=RequestMethod.GET)
-    public String insertCart(@ModelAttribute CartVO cartVO, HttpSession session) throws Exception{
-    	int userIdx = (int) session.getAttribute("userIdx");
-        cartVO.setUserIdx(userIdx);
+    public String insertCart(@ModelAttribute CartVO cartVO, HttpServletRequest request) throws Exception{
+    	
+    	HttpSession session = request.getSession();
+    	
+    	UserVO userVO = (UserVO)session.getAttribute("login");
+    	
+    	int userIdx = userVO.getIdx();
+
         // 장바구니에 기존 상품이 있는지 검사
         int count = cartService.countCart(cartVO.getGameIdx(), userIdx);
-        //count == 0 ? cartService.updateCart(cartVO) : cartService.insertCart(cartVO);
+
         if(count == 0){
             // 없으면 insert
             cartService.insertCart(cartVO);

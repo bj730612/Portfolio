@@ -40,7 +40,9 @@
 				</div>
 				<div>
 					<form name="form1" method="get" action="/cart/insertCart.do">
-						<input type="hidden" name="gameIdx" value="${gameVO.idx}">
+						<input type="hidden" name="gameIdx" value="${cartVO.idx}">
+						<input type="hidden" name="userIdx" value="${cartVO.userIdx}">
+						<input type="hidden" name="boardIdx" value="${cartVO.boardIdx}">
 						<select name="quantity">
 							<c:forEach begin="1" end="10" var="i">
 								<option value="${i}">${i}</option>

@@ -14,11 +14,6 @@
 
 </head>
 <body>
-
-
-
-
-
 <div class="box-body">
 	<select name="searchType">
 		<option value="null" <c:out value="${searchVO.searchType == null ? 'selected':''}"/>>---</option>
@@ -45,9 +40,9 @@
 		<div style="border:1px solid blue; display:inline-block;">
 			<div style="border:1px solid red;">${post.idx}</div>
 			<a href="/board/readBoard.do${pm.makeQuery(pm.cri.page)}&boardIdx=${post.idx}"><div style="border:1px solid red;">${post.title}
-				<c:if test="${post.recnt > 0}">
+<%-- 				<c:if test="${post.recnt > 0}"> --%>
 					<span style="color:red;">(${post.recnt})</span>
-				</c:if>
+<%-- 				</c:if> --%>
 			</div></a>
 			<div style="border:1px solid red;">${post.name}</div>
 			<div style="border:1px solid red;">${post.viewCount}</div>

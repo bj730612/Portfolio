@@ -81,9 +81,9 @@ function getReviewList() {
 			<span><strong>상품평</strong></span> <span id="cCnt"></span>
 		</div>
 		<div>
-			<input type="text" id="review" name="review" placeholder="댓글을 입력 해 주세요."> <br>
+			<input type="text" id="review" name="review" placeholder="상품평을 입력 해 주세요."> <br>
 			<div>
-				<a href='#' onClick="add_review('${boardVO.idx}')" class="btn pull-right btn-success">댓글 등록</a>
+				<a href='#' onClick="add_review('${boardVO.idx}')" class="btn pull-right btn-success">평가 등록</a>
             </div>
 		</div>
 		<input type="hidden" id="boardIdx" name="boardIdx" value="${boardVO.idx}" />

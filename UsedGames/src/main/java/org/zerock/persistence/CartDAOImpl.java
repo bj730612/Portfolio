@@ -52,7 +52,7 @@ public class CartDAOImpl implements CartDAO {
     //장바구니 동일한 상품 레코드 확인
     @Override
     public int countCart(int gameIdx, int userIdx) {
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Integer> map = new HashMap<String, Integer>();
         map.put("gameIdx",gameIdx);
         map.put("userIdx", userIdx);
         return sqlSession.selectOne(NAMESPACE + "countCart", map);

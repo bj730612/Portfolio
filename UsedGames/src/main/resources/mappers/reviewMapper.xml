@@ -7,8 +7,8 @@
 
 <!-- 댓글 등록 -->
 	<insert id="insertReview">
-		INSERT INTO review (board_idx, user_idx, comment, image)
-		VALUES (#{boardIdx}, #{userIdx}, #{comment}, #{image})
+		INSERT INTO review (board_idx, user_idx, comment)
+		VALUES (#{boardIdx}, #{userIdx}, #{comment})
 	</insert>
 
 <!-- 댓글 리스트 -->
