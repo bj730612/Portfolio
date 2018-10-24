@@ -1,12 +1,14 @@
 package org.zerock.web;
 
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.zerock.domain.GameVO;
+import org.zerock.domain.ReviewVO;
+import org.zerock.domain.UserVO;
 import org.zerock.service.GameService;
 
 @RequestMapping("/game")
@@ -49,10 +53,16 @@ public class GameController {
 	}
 	
 	@RequestMapping(value="/gameInfo.do", method=RequestMethod.GET)
-	public void gameInfo(Model model, @RequestParam("idx") int idx) throws Exception {
+	public String gameInfo(Model model, @RequestParam("gameIdx") int gameIdx) throws Exception {
 		
-		model.addAttribute(gameService.gameInfo(idx));
+		GameVO gameVO = new GameVO();
+		gameVO.setIdx(gameIdx);
+		List<GameVO> list = gameService.gameInfo(gameVO);
+		model.addAttribute("gameVO", list);
+		
+		return "/game/gameInfo";
 	}
+
 	
 	@ResponseBody
 	@RequestMapping(value="/categoryList.do", method=RequestMethod.GET)

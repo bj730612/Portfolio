@@ -61,7 +61,7 @@ public class CommentController{
         	for(int i=0; i<commentVO.size(); i++) {
         		HashMap hm = new HashMap();
         		hm.put("idx", commentVO.get(i).getIdx());
-        		hm.put("comment", commentVO.get(i).getComment());
+        		hm.put("content", commentVO.get(i).getContent());
         		hm.put("name", commentVO.get(i).getName());
         		
         		hmlist.add(hm);

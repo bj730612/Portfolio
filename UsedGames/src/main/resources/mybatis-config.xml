@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-<!-- 카넬표기법 세팅 -->
+<!-- 카멜표기법 세팅 -->
 	<settings>
   		<setting name="mapUnderscoreToCamelCase" value="true" />
   	</settings>

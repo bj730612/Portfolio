@@ -29,5 +29,5 @@ public interface GameDAO {
 	
 	public List<GameVO> categoryGameList(GameVO gameVO) throws Exception;
 	
-	public GameVO gameInfo(int idx) throws Exception;
+	public List<GameVO> gameInfo(GameVO gameVO) throws Exception;
 }

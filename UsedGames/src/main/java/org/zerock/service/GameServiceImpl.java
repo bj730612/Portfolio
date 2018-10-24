@@ -59,7 +59,7 @@ public class GameServiceImpl implements GameService {
 	}
 	
 	@Override
-	public GameVO gameInfo(int idx) throws Exception {
-		return gameDAO.gameInfo(idx);
+	public List<GameVO> gameInfo(GameVO gameVO) throws Exception {
+		return gameDAO.gameInfo(gameVO);
 	}
 }

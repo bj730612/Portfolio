@@ -9,7 +9,14 @@ public class CartVO {
 	private int boardIdx;
 	private String gameTitle;
 	private int price;
+	private int cost;
 	
+	public int getCost() {
+		return cost;
+	}
+	public void setCost(int cost) {
+		this.cost = cost;
+	}
 	public String getGameTitle() {
 		return gameTitle;
 	}

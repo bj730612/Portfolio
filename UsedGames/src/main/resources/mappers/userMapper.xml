@@ -7,56 +7,26 @@
 
 <!-- 회원가입 -->
 	<insert id="insertUser">
-		INSERT INTO user (email, pwd, name, phone)
+		INSERT INTO member (email, pwd, name, phone)
 		VALUES (#{email}, #{password}, #{name}, #{phone})
 	</insert>
 	
 <!-- 회원 로그인 체크 -->
 	<select id="login" resultType="UserVO">
-		SELECT * FROM user
+		SELECT * FROM member
 		WHERE email = #{email} AND pwd = #{password}
 	</select>
 	
 <!-- 자동 로그인 -->
 	<update id="keepLogin">
-		UPDARE user SET sessionkey = #{sessionId}, sessionlimit = #{next}
+		UPDATE member SET sessionkey = #{sessionId}, sessionlimit = #{next}
 		WHERE email = #{email}
 	</update>
 	
 <!-- 세션키 -->
 	<select id="checkUserWithSessionKey" resultType="UserVO">
-		SELECT * FROM user
+		SELECT * FROM member
 		WHERE sessionkey = #{value} AND sessionlimit > now()
-	</select>
-	
-	<insert id="insertCart">
-		INSERT INTO cart
-		VALUES 
-	</insert>
-	
-	<select id="listCriteria" resultType="CartVO">
-		<![CDATA[
-		SELECT b.idx
-			 , b.title
-			 , b.write_date
-			 , b.view_count
-			 , b.content,
-			(SELECT COUNT(*) FROM comment WHERE board_idx = b.idx) AS recnt
-		FROM user u
-		   , board b
-		WHERE u.idx = b.user_idx AND b.post_category_idx != 5
-		ORDER BY b.idx DESC
-		LIMIT #{pageStart}, #{perPageNum}
-		]]>
-	</select>
-	
-	<select id="countPaging" resultType="int">
-		<![CDATA[
-		SELECT count(b.idx)
-		FROM user u
-		   , board b
-		WHERE u.idx = b.user_idx and b.post_category_idx != 5
-		]]>
 	</select>
 	
 </mapper>

@@ -44,7 +44,7 @@ public class ReviewController{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "success";
+		return "redirect:../game/gameInfo.do";
 	}
 	
 	//�뙎湲� 由ъ뒪�듃 
@@ -61,7 +61,7 @@ public class ReviewController{
         	for(int i=0; i<reviewVO.size(); i++) {
         		HashMap hm = new HashMap();
         		hm.put("idx", reviewVO.get(i).getIdx());
-        		hm.put("comment", reviewVO.get(i).getComment());
+        		hm.put("content", reviewVO.get(i).getContent());
         		hm.put("name", reviewVO.get(i).getName());
         		
         		hmlist.add(hm);

@@ -61,7 +61,7 @@ public class GameDAOImpl implements GameDAO {
 	}
 	
 	@Override
-	public GameVO gameInfo(int idx) throws Exception {
-		return sqlSession.selectOne(NAMESPACE+".gameInfo", idx);
+	public List<GameVO> gameInfo(GameVO gameVO) throws Exception {
+		return sqlSession.selectList(NAMESPACE+".gameInfo", gameVO);
 	}
 }

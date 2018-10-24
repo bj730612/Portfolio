@@ -7,13 +7,13 @@
 
 <!-- 댓글 등록 -->
 	<insert id="insertReview">
-		INSERT INTO review (board_idx, user_idx, comment)
-		VALUES (#{boardIdx}, #{userIdx}, #{comment})
+		INSERT INTO review (board_idx, user_idx, content)
+		VALUES (#{boardIdx}, #{userIdx}, #{content})
 	</insert>
 
 <!-- 댓글 리스트 -->
 	<select id="selectReview" resultType="ReviewVO">
-		SELECT u.name, r.comment, r.write_date
+		SELECT u.name, r.content, r.write_date
 		from user u, review r
 		where r.board_idx = #{boardIdx} and u.idx = r.user_idx
 		order by r.write_date desc;

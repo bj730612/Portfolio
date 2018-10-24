@@ -26,48 +26,65 @@
 	</div>
 </header>
 <body style="margin: auto; width: 900px;">
-	<div style="position: relative; z-index: 1; padding-top: 160px;">
-		<div class="d-flex">
-			<div class="d-inline">
-				<img src="/resources/uploadFile/image/${gameVO.image}">
+<script>
+function add_review() {
+	frm.action = "localhost:8080/game/gameInfo.do?boardIdx="${gameVO[0].boardIdx};
+	frm.submit();
+}
+</script>
+	<form name="frm">
+		<div style="position: relative; z-index: 1; padding-top: 160px;">
+			<div class="d-flex">
+				<div class="d-inline">
+					<img src="/resources/uploadFile/image/${gameVO[0].image}">
+				</div>
+				<div>
+					<div>
+						<p>${gameVO[0].title}</p>
+					</div>
+					<div>
+						<p>${gameVO[0].price}</p>
+					</div>
+					<div>
+						<form name="form1" method="get" action="/cart/insertCart.do">
+							<input type="hidden" name="gameIdx" value="${gameVO[0].idx}">
+							<input type="hidden" name="userIdx" value="${gameVO[0].userIdx}">
+							<input type="hidden" name="boardIdx" value="${gameVO[0].boardIdx}">
+							<select name="quantity">
+								<c:forEach begin="1" end="10" var="i">
+									<option value="${i}">${i}</option>
+								</c:forEach>
+							</select>&nbsp;개
+							<input type="submit" value="장바구니">
+						</form>
+						<form name="form2" method="get" action="/order/insertOrder.do">
+							<input type="submit" value="주문하기">
+						</form>
+					</div>
+				</div>
+			</div>
+			<div>
+				<p>상세 정보</p>
+				<img src="/resources/uploadFile/image/${gameVO[0].subImage}">
 			</div>
 			<div>
 				<div>
-					<p>${gameVO.title}</p>
+					<span><strong>상품평</strong></span> <span id="cCnt"></span>
 				</div>
 				<div>
-					<p>${gameVO.price}</p>
+					<input type="text" id="review" name="review" placeholder="상품평을 입력 해 주세요."> <br>
+					<div>
+						<a href='#' onClick="add_review()" class="btn pull-right btn-success">평가 등록</a>
+		            </div>
 				</div>
-				<div>
-					<form name="form1" method="get" action="/cart/insertCart.do">
-						<input type="hidden" name="gameIdx" value="${cartVO.idx}">
-						<input type="hidden" name="userIdx" value="${cartVO.userIdx}">
-						<input type="hidden" name="boardIdx" value="${cartVO.boardIdx}">
-						<select name="quantity">
-							<c:forEach begin="1" end="10" var="i">
-								<option value="${i}">${i}</option>
-							</c:forEach>
-						</select>&nbsp;개
-						<input type="submit" value="장바구니">
-					</form>
-					<form name="form2" method="get" action="/order/insertOrder.do">
-						<input type="submit" value="주문하기">
-					</form>
-				</div>
+				<input type="hidden" id="boardIdx" name="boardIdx" value="${gameVO[0].boardIdx}" />
+			</div>
+			<div>
+				<p>상품문의</p>
+	<%-- 			<%@include file="../question/question.jsp" %> --%>
 			</div>
 		</div>
-		<div>
-			<p>상세 정보</p>
-			<img src="/resources/uploadFile/image/${gameVO.subImage}">
-		</div>
-		<div>
-			<%@include file="../review/review.jsp" %>
-		</div>
-		<div>
-			<p>상품문의</p>
-<%-- 			<%@include file="../question/question.jsp" %> --%>
-		</div>
-	</div>
+	</form>
 </body>
 <c:import url="/footer.do"></c:import>
 </html>

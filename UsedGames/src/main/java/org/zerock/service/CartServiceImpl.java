@@ -41,12 +41,12 @@ public class CartServiceImpl implements CartService {
     }
     //장바구니 상품 확인
     @Override
-    public int countCart(int gameIdx, int userIdx) throws Exception {
-        return cartDAO.countCart(gameIdx, userIdx);
+    public int countCart(CartVO cartVO) throws Exception {
+        return cartDAO.countCart(cartVO);
     }
     //장바구니 상품 수량 변경
     @Override
-    public void changeCart(CartVO cartVO) throws Exception {
-        cartDAO.changeCart(cartVO);
+    public void duplicateUpdateCart(CartVO cartVO) throws Exception {
+        cartDAO.duplicateUpdateCart(cartVO);
     }
 }

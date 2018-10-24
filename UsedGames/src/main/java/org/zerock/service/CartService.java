@@ -16,7 +16,7 @@ public interface CartService {
 	
 	public int sumCost(int userIdx) throws Exception;
 	
-	public void changeCart(CartVO cartVO) throws Exception;
+	public void duplicateUpdateCart(CartVO cartVO) throws Exception;
 
-	public int countCart(int gameIdx, int userIdx) throws Exception;
+	public int countCart(CartVO cartVO) throws Exception;
 }

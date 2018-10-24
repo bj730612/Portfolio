@@ -21,7 +21,7 @@
 		<ul id="flexiselDemo4">
 			<c:forEach var="gameVO" items="${gameVOs}">
 				<li style="height: 370px;">
-					<a href="/game/gameInfo.do?idx=${gameVO.idx}">
+					<a href="/game/gameInfo.do?gameIdx=${gameVO.idx}">
 						<div  class="col-md-3">
 							<div class="card mb-3">
 								<img class="card-img-top" style="margin: 0 auto;" src="/resources/uploadFile/image/${gameVO.image}" alt="${gameVO.image}">

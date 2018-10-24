@@ -34,11 +34,11 @@ public class UserController {
 	@Inject 
 	private UserService userService;
 
-	//회원가입 페이지
+	//�쉶�썝媛��엯 �럹�씠吏�
 	@RequestMapping(value="/signUp.do", method=RequestMethod.GET)
 	public void signUp(Model model) throws Exception {}
 	
-	//회원가입
+	//�쉶�썝媛��엯
 	@RequestMapping(value="/signUp.do", method=RequestMethod.POST)
 	public String signUp(UserVO userVO) throws Exception {
 		
@@ -47,32 +47,32 @@ public class UserController {
 		return "redirect:/user/login.do";
 	}
 	
-	//로그인 페이지
+	//濡쒓렇�씤 �럹�씠吏�
 	@RequestMapping(value="/login.do", method=RequestMethod.GET)
 	public void login() throws Exception {}
 	
-	//로그인
+	//濡쒓렇�씤
 	@RequestMapping(value="/loginCheck.do", method=RequestMethod.POST)
 	public void loginCheck(LoginDTO loginDTO, HttpSession session, Model model) throws Exception {
 		
-		//로그인 세션정보가 있을 경우
+		//濡쒓렇�씤 �꽭�뀡�젙蹂닿� �엳�쓣 寃쎌슦
 		if(session.getAttribute("login") != null) {
 			
-			//세션정보 삭제
+			//�꽭�뀡�젙蹂� �궘�젣
 			session.removeAttribute("login");
 		}
 		
-		//로그인
+		//濡쒓렇�씤
 		UserVO userVO = userService.login(loginDTO);
 		
-		//로그인 실패
+		//濡쒓렇�씤 �떎�뙣
 		if(userVO == null) {
 			return;
 		}
 
 		model.addAttribute("userVO", userVO);
 		
-		// 자동 로그인 체크 확인
+		// �옄�룞 濡쒓렇�씤 泥댄겕 �솗�씤
 		if(loginDTO.isUseCookie()) {
 		
 			int amount = 60 * 60 * 24 * 7;
@@ -83,13 +83,13 @@ public class UserController {
 		}
 	}
 	
-	// 로그아웃(자동로그인 기록 삭제)
+	// 濡쒓렇�븘�썐(�옄�룞濡쒓렇�씤 湲곕줉 �궘�젣)
 	@RequestMapping(value="/logout.do", method=RequestMethod.GET)
 	public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		Object obj = session.getAttribute("login");
 		
-		//로그인 세션정보가 있을경우
+		//濡쒓렇�씤 �꽭�뀡�젙蹂닿� �엳�쓣寃쎌슦
 		if(obj != null) {
 			UserVO userVO = (UserVO) obj;
 			
@@ -98,7 +98,7 @@ public class UserController {
 			
 			Cookie logincookie = WebUtils.getCookie(request, "loginCookie");
 			
-			//쿠키가 있을경우
+			//荑좏궎媛� �엳�쓣寃쎌슦
 			if(logincookie != null) {
 				logincookie.setPath("/");
 				logincookie.setMaxAge(0);
@@ -107,45 +107,5 @@ public class UserController {
 			}
 		}
 		return "/user/logout";
-	}
-	
-	//게시글 리스트
-	@RequestMapping(value="/cartList.do", method=RequestMethod.GET)
-	public void listAll(SearchVO cri, Model model) throws Exception {
-		
-		PageMaker pm = new PageMaker();
-		
-		model.addAttribute("carts", userService.listCriteria(cri));
-		pm.setCri(cri);
-		pm.setTotalCount(userService.listCountCriteria(cri));
-		
-		model.addAttribute("pm", pm);
-	}
-	
-	//게시글 삭제
-	@RequestMapping(value="/deleteCart.do", method=RequestMethod.POST)
-	public String deleteCart(@RequestParam("idx") int idx, RedirectAttributes rttr) throws Exception {
-		
-		//게시글 삭제 후 "SUCCESS메세지 보내기
-		userService.deleteCart(idx);
-		rttr.addFlashAttribute("msg", "SUCCESS");
-		
-		return "redirect:/user/cartList.do";
-	}
-	
-	//게시글 수정
-	@RequestMapping(value="/updateCart.do", method=RequestMethod.GET)
-	public void updateCart(@RequestParam("idx") int idx, Model model) throws Exception {
-		
-		model.addAttribute(userService.readCart(idx));
-	}
-	
-	@RequestMapping(value="/updateCart.do", method=RequestMethod.POST)
-	public String updateCart(CartVO cartVO, RedirectAttributes rttr) throws Exception {
-		
-		userService.updateCart(cartVO);
-		rttr.addFlashAttribute("msg", "SUCCESS");
-		
-		return "redirect:/user/cartList.do";
 	}
 }

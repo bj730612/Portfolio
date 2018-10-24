@@ -35,35 +35,35 @@
                     <th>금액</th>
                     <th>취소</th>
                 </tr>
-                <c:forEach var="cartVOs" items="${cartVOs}" varStatus="i">
+                <c:forEach var="list" items="${list}" varStatus="i">
                 <tr>
                     <td>
-                        ${cartVO.gameTitle}
+                        ${list.gameTitle}
                     </td>
                     <td style="width: 80px" align="right">
-                        <fmt:formatNumber pattern="###,###,###" value="${cartVOs.price}"/>
+                        <input value="${list.price}"/>
                     </td>
                     <td>
-                        <input type="number" style="width: 40px" name="quantity" value="${cartVOs.quantity}" min="1">
-                        <input type="hidden" name="gameId" value="${cartVOs.gameIdx}">
+                        <input type="number" style="width: 40px" name="quantity" value="${list.quantity}" min="1">
+                        <input type="hidden" name="gameIdx" value="${list.gameIdx}">
                     </td>
                     <td style="width: 100px" align="right">
-                        <fmt:formatNumber pattern="###,###,###" value="${cartVOs.cost}"/>
+                        <input value="${list.cost}"/>
                     </td>
                     <td>
-                        <a href="/cart/deleteCart.do?cartIdx=${cartVOs.cartIdx}">삭제</a>
+                        <a href="/cart/deleteCart.do?cartIdx=${list.idx}">삭제</a>
                     </td>
                 </tr>
                 </c:forEach>
                 <tr>
                     <td colspan="5" align="right">
-                        장바구니 금액 합계 : <fmt:formatNumber pattern="###,###,###" value="${map.sumCost}"/><br>
-                        배송료 : ${map.fee}<br>
-                        전체 주문금액  :<fmt:formatNumber pattern="###,###,###" value="${map.allSum}"/>
+                        장바구니 금액 합계 : <input value="${sumCost}"/><br>
+                        배송료 : ${fee}<br>
+                        전체 주문금액  :<input value="${allSum}"/>
                     </td>
                 </tr>
             </table>
-            <input type="hidden" name="count" value="${map.count}">
+            <input type="hidden" name="count" value="${count}">
             <button type="submit" id="btnUpdate">수정</button>
         </form>
         </c:otherwise>
@@ -81,12 +81,12 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="cartVO" items="${cartVOs}">
+				<c:forEach var="list" items="${list}">
 					<tr>
 						<td><input type="checkbox" aria-label="Checkbox for following text input"></td>
-						<td>${cartVO.title}</td>
-						<td>${cartVO.price}</td>
-						<td>${cartVO.quantity}</td>
+						<td>${list.gameTitle}</td>
+						<td>${list.price}</td>
+						<td>${list.quantity}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
