@@ -8,9 +8,9 @@
     <!-- 1. 장바구니 추가 -->
     <insert id="insertCart">
         INSERT INTO cart (
-            user_idx AS userIdx
-          , game_idx AS gameIdx
-          , board_idx AS boardIdx
+            user_idx
+          , game_idx
+          , board_idx
           , quantity )
         VALUES
             ( #{userIdx}, #{gameIdx}, #{boardIdx}, #{quantity} )
@@ -37,7 +37,7 @@
     
     <!-- 3. 장바구니 전체 금액 -->
     <select id="sumCost" resultType="int">
-        SELECT IFNULL((price * quantity), 0) AS cost
+        SELECT IFNULL(SUM(price * quantity), 0) AS cost
         FROM cart a
         inner join game b on a.game_idx = b.idx 
         WHERE a.user_idx = #{userIdx}

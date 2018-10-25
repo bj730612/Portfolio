@@ -69,48 +69,48 @@
         </c:otherwise>
     </c:choose>
     <button type="button" id="btnList">상품목록</button>
-	<div>
-		<p>장바구니</p>
-		<table class="table">
-			<thead>
-				<tr>
-					<th scope="col"><input type="checkbox" aria-label="Checkbox for following text input"></th>
-					<th scope="col">상품정보</th>
-					<th scope="col">가격</th>
-					<th scope="col">수량</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="list" items="${list}">
-					<tr>
-						<td><input type="checkbox" aria-label="Checkbox for following text input"></td>
-						<td>${list.gameTitle}</td>
-						<td>${list.price}</td>
-						<td>${list.quantity}</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</div>
+<!-- 	<div> -->
+<!-- 		<p>장바구니</p> -->
+<!-- 		<table class="table"> -->
+<!-- 			<thead> -->
+<!-- 				<tr> -->
+<!-- 					<th scope="col"><input type="checkbox" aria-label="Checkbox for following text input"></th> -->
+<!-- 					<th scope="col">상품정보</th> -->
+<!-- 					<th scope="col">가격</th> -->
+<!-- 					<th scope="col">수량</th> -->
+<!-- 				</tr> -->
+<!-- 			</thead> -->
+<!-- 			<tbody> -->
+<%-- 				<c:forEach var="list" items="${list}"> --%>
+<!-- 					<tr> -->
+<!-- 						<td><input type="checkbox" aria-label="Checkbox for following text input"></td> -->
+<%-- 						<td>${list.gameTitle}</td> --%>
+<%-- 						<td>${list.price}</td> --%>
+<%-- 						<td>${list.quantity}</td> --%>
+<!-- 					</tr> -->
+<%-- 				</c:forEach> --%>
+<!-- 			</tbody> -->
+<!-- 		</table> -->
+<!-- 	</div> -->
 
-	<ul class="pagination">
-		<c:if test="${pm.prev}">
-			<li class="page-item"><a class="page-link"
-				href="/user/cartList.do${pm.makeQuery(pm.startPage - 1)}">&laquo</a></li>
-		</c:if>
+<!-- 	<ul class="pagination"> -->
+<%-- 		<c:if test="${pm.prev}"> --%>
+<!-- 			<li class="page-item"><a class="page-link" -->
+<%-- 				href="/user/cartList.do${pm.makeQuery(pm.startPage - 1)}">&laquo</a></li> --%>
+<%-- 		</c:if> --%>
 
-		<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="idx">
-			<li class="page-item"
-				<c:out value="${pm.cri.page == idx?'class=active':''}" />><a
-				class="page-link" href="/user/cartList.do${pm.makeQuery(idx)}">${idx}</a>
-			</li>
-		</c:forEach>
+<%-- 		<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="idx"> --%>
+<!-- 			<li class="page-item" -->
+<%-- 				<c:out value="${pm.cri.page == idx?'class=active':''}" />><a --%>
+<%-- 				class="page-link" href="/user/cartList.do${pm.makeQuery(idx)}">${idx}</a> --%>
+<!-- 			</li> -->
+<%-- 		</c:forEach> --%>
 
-		<c:if test="${pm.next && pm.endPage > 0 }">
-			<li class="page-item"><a class="page-link"
-				href="/user/cartList.do${pm.makeQuery(pm.endPage + 1)}">&raquo</a></li>
-		</c:if>
-	</ul>
+<%-- 		<c:if test="${pm.next && pm.endPage > 0 }"> --%>
+<!-- 			<li class="page-item"><a class="page-link" -->
+<%-- 				href="/user/cartList.do${pm.makeQuery(pm.endPage + 1)}">&raquo</a></li> --%>
+<%-- 		</c:if> --%>
+<!-- 	</ul> -->
 
 	<a href="/main.do"><button type="button">메인으로</button></a>
 <script>

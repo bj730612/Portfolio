@@ -33,10 +33,14 @@ public class ReviewController{
 	@ResponseBody
 	public String insertReview(ReviewVO reviewVO, @RequestParam("boardIdx") int boardIdx, HttpServletRequest request) throws Exception {
 		
+		System.out.println(1);
+		
 		HttpSession session = request.getSession();
 		
 		//濡쒓렇�씤 �깉�뀡 �젙蹂� 媛��졇�삤湲�
 		UserVO userVO = (UserVO)session.getAttribute("login");
+		
+		System.out.println(boardIdx);
 		
 		try {
 			reviewVO.setUserIdx(userVO.getIdx());

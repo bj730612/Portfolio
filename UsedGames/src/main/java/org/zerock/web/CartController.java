@@ -45,7 +45,7 @@ public class CartController {
             // 있으면 update
             cartService.duplicateUpdateCart(cartVO);
         }
-        System.out.println(cartVO.getGameIdx() + "," + cartVO.getBoardIdx() + "," + cartVO.getQuantity());
+        
         return "redirect:cartList.do";
     }
 
@@ -68,6 +68,7 @@ public class CartController {
         model.addAttribute("sumCost", sumCost);        // 장바구니 전체 금액
         model.addAttribute("fee", fee);                 // 배송금액
         model.addAttribute("allSum", sumCost+fee);    // 주문 상품 전체 금액
+        
         return "/user/cartList";
     }
 
@@ -75,7 +76,8 @@ public class CartController {
     @RequestMapping(value="deleteCart.do", method=RequestMethod.GET)
     public String delete(@RequestParam int cartIdx) throws Exception{
         cartService.deleteCart(cartIdx);
-        return "/user/cartList";
+        
+        return "redirect:cartList.do";
     }
 
     // 4. 장바구니 수정
@@ -95,7 +97,7 @@ public class CartController {
             cartVO.setGameIdx(gameIdx[i]);
             cartService.updateCart(cartVO);
         }
-
-        return "/user/cartList";
+        
+        return "redirect:cartList.do";
     }
 }
