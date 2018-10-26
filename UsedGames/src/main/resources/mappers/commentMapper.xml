@@ -13,10 +13,10 @@
 
 <!-- 댓글 리스트 -->
 	<select id="selectComment" resultType="CommentVO">
-		SELECT u.name, c.content, c.write_date
-		from user u, comment c
-		where c.board_idx = #{boardIdx} and u.idx = c.user_idx
-		order by c.write_date desc;
+		SELECT a.name, b.content, b.write_date
+		FROM member a, comment b
+		WHERE b.board_idx = #{boardIdx} AND a.idx = b.user_idx
+		ORDER BY b.write_date DESC;
 	</select>
 	
 </mapper>

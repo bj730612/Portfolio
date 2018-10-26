@@ -68,7 +68,7 @@
         </form>
         </c:otherwise>
     </c:choose>
-    <button type="button" id="btnList">상품목록</button>
+    <a href="/cart/cartList.do"><button type="button" id="btnList">상품목록</button></a>
 <!-- 	<div> -->
 <!-- 		<p>장바구니</p> -->
 <!-- 		<table class="table"> -->

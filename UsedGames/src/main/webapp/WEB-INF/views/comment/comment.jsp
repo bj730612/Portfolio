@@ -32,7 +32,7 @@ function add_comment(boardIdx) {
 			error : function() {
 				alert("댓글이 등록 되었습니다.2");
 				getCommentList();
-				$("#comment").val("");
+				$("#content").val("");
 			}
 		});	
 	}

@@ -47,20 +47,22 @@
 		<ul id="flexiselDemo5">
 			<c:forEach var="gameVO" items="${gameVOs}">
 				<li style="height: 370px;">
-					<div class="col-md-3">
-						<div class="card mb-3">
-							<img class="card-img-top" style="margin: 0 auto;" src="/resources/uploadFile/image/${gameVO.image}" alt="${gameVO.image}">
-							<div class="card-body" style="text-align: left;">
-								<div class="product-text">
-									<p class="card-text" style="line-height: 100%;">${gameVO.title}</p>
-								</div>
-								<div class="d-flex justify-content-between align-items-center">
-									<small class="text-muted">${gameVO.viewCount}</small>
-									<p class="card-text">${gameVO.price}원</p>
+					<a href="/game/gameInfo.do?gameIdx=${gameVO.idx}">
+						<div class="col-md-3">
+							<div class="card mb-3">
+								<img class="card-img-top" style="margin: 0 auto;" src="/resources/uploadFile/image/${gameVO.image}" alt="${gameVO.image}">
+								<div class="card-body" style="text-align: left;">
+									<div class="product-text">
+										<p class="card-text" style="line-height: 100%;">${gameVO.title}</p>
+									</div>
+									<div class="d-flex justify-content-between align-items-center">
+										<small class="text-muted">${gameVO.viewCount}</small>
+										<p class="card-text">${gameVO.price}원</p>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					</a>
 				</li>
 			</c:forEach>
 		</ul>

@@ -7,29 +7,29 @@
 
 <!-- 게임 카테고리1 -->
 	<select id="selectGameType" resultType="GameCategory1VO">
-		select * from category order by idx asc
+		SELECT * FROM category ORDER BY idx
 	</select>
 	
 <!-- 게임 리스트 -->
 	<select id="selectAllGame" resultType="GameVO">
-		select a.idx
+		SELECT a.idx
 			 , a.title
 			 , a.price
 			 , c.content
 			 , c.view_count
 			 , c.image
 			 , d.name
-			from game a inner join game_type b on a.idx = b.game_idx
-						inner join board c on c.idx = a.board_idx  
-						inner join member d on d.idx = c.user_idx
-			group by a.title
-			order by a.idx desc
+			FROM game a INNER JOIN game_type b ON a.idx = b.game_idx
+						INNER JOIN board c ON c.idx = a.board_idx  
+						INNER JOIN member d ON d.idx = c.user_idx
+			GROUP BY a.title
+			ORDER BY a.idx DESC
 	</select>
 	
 <!-- 게임 카테고리2 -->
 	<select id="selectGameCategory2" resultType="GameCategory2VO">
-		select * from category2
-		where 1=1
+		SELECT * FROM category2
+		WHERE 1=1
 		<if test="idx != null">
 		AND idx = #{idx}
 		</if>
@@ -37,11 +37,11 @@
 	
 <!-- 게임 카테고리3 -->
 	<select id="selectGameCategory3" resultType="GameCategory3VO">
-		select * from category3
+		SELECT * FROM category3
 	</select>
 	
 	<select id="categoryGameList" resultType="map">
-		select a.idx
+		SELECT a.idx
 			 , a.title
 			 , a.price
 			 , a.board_idx
@@ -49,23 +49,23 @@
 			 , d.name as device_name
 		 	 , e.name as type_name
 		 	 , f.name as genre_name
-		from game a
-			 inner join game_type b on a.idx = b.game_idx
-			 inner join category2 d on b.category2_idx = d.idx
-			 inner join category c on d.category_idx = c.idx
-			 inner join category3 e on b.category3_idx = e.idx
-			 inner join genre f on b.genre_idx = f.idx
-		where 1=1
+		FROM game a
+			 inner join game_type b ON a.idx = b.game_idx
+			 inner join category2 d ON b.category2_idx = d.idx
+			 inner join category c ON d.category_idx = c.idx
+			 inner join category3 e ON b.category3_idx = e.idx
+			 inner join genre f ON b.genre_idx = f.idx
+		WHERE 1=1
 		<if test="device_idx != null">
-		AND d.idx in (#{device_idx})
+		AND d.idx IN (#{device_idx})
 		</if>
 		<if test="type_idx != null">
-		AND e.idx in (#{type_idx})
+		AND e.idx IN (#{type_idx})
 		</if>
 	</select>
 	
 	<select id="gameInfo" resultType="GameVO">
-		select a.idx
+		SELECT a.idx
 			 , a.title
 			 , a.price
 			 , a.board_idx
@@ -74,8 +74,8 @@
 			 , b.image
 			 , b.sub_image
 			 , b.content
-		from game a
-			 inner join board b on a.board_idx = b.idx
-		where a.idx = #{idx}
+		FROM game a
+			 INNER JOIN board b ON a.board_idx = b.idx
+		WHERE a.idx = #{idx}
 	</select>
 </mapper>

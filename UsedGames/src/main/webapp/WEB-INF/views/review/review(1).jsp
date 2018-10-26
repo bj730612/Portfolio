@@ -24,15 +24,15 @@ function add_review(boardIdx) {
 			data : $("#reviewForm").serialize(),
 			complete : function(data) {
 				if(data == "success") {
-					alert("상품평이 등록 되었습니다.1");
+					alert("댓글이 등록 되었습니다.1");
 					alert(userVO);
 					getReviewList();
 				}
 			},
 			error : function() {
-				alert("상품평이 등록 되었습니다.2");
-				getReviewList();
-				$("#content").val("");
+				alert("댓글이 등록 되었습니다.2");
+				getreviewList();
+				$("#review").val("");
 			}
 		});	
 	}
@@ -55,7 +55,7 @@ function getReviewList() {
 				for (i = 0; i < data.length; i++) {
 					html += "<div>";
 					html += "<div><table class='table'><h6><strong>"+ data[i].name + "</strong></h6>";
-					html += data[i].content+ "<tr><td></td></tr>";
+					html += data[i].comment+ "<tr><td></td></tr>";
 					html += "</table></div>";
 					html += "</div>";
 				}
@@ -66,7 +66,7 @@ function getReviewList() {
 				html += "</div>";
 			}
 			$("#cCnt").html(cCnt);
-			$("#reviewList").html(html);
+			$("#reviwList").html(html);
 		},
 		error : function(request, status, error) {
 			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -81,13 +81,20 @@ function getReviewList() {
 			<span><strong>상품평</strong></span> <span id="cCnt"></span>
 		</div>
 		<div>
-			<input type="text" id="content" name="content" placeholder="상품평을 입력 해 주세요."> <br>
+			<input type="text" id="review" name="review" placeholder="상품평을 입력 해 주세요."> <br>
 			<div>
-				<a href='#' onClick="add_review('${boardVO.idx}')" class="btn pull-right btn-success">댓글 등록</a>
+				<a href='#' onClick="add_review('${gameVO[0].boardIdx}')" class="btn pull-right btn-success">평가 등록</a>
             </div>
 		</div>
-		<input type="hidden" id="boardIdx" name="boardIdx" value="${boardVO.idx}" />
+		<input type="hidden" id="boardIdx" name="boardIdx" value="${gameVO[0].boardIdx}" />
 	</form>
 </div>
+
+<div>
+	<form id="reviewListForm" name="reviewListForm" method="post">
+		<div id="reviewList"></div>
+	</form>
+</div>
+
 </body>
 </html>

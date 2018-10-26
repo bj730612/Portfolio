@@ -18,20 +18,20 @@
 
 <!-- 게시글 세부내용 -->
 	<select id="readBoard" resultType="BoardVO">
-		SELECT u.name, b.idx, b.title, b.write_date, b.view_count, b.content, b.image
-		from user u, board b
-		where u.idx = b.user_idx and b.idx = #{idx}
+		SELECT a.name, b.idx, b.title, b.write_date, b.view_count, b.content, b.image
+		FROM member a, board b
+		WHERE a.idx = b.user_idx and b.idx = #{idx}
 	</select>
 	
 <!-- 게시글 수정 -->
 	<update id="updateBoard">
-		update board set title = #{title}, content = #{content}
-		where idx = #{idx}
+		UPDATE board SET title = #{title}, content = #{content}
+		WHERE idx = #{idx}
 	</update>
 
 <!-- 게시글 삭제 -->
 	<delete id="deleteBoard">
-		delete from board where idx = #{idx}
+		DELETE FROM board WHERE idx = #{idx}
 	</delete>
 	
 <!-- 게시글 조회수 -->
@@ -42,35 +42,35 @@
 	
 	<select id="listCriteria" resultType="BoardVO">
 		<![CDATA[
-		SELECT u.name, b.idx, b.title, b.write_date, b.view_count, b.content,
-			(SELECT COUNT(*) FROM comment where board_idx = b.idx) AS recnt
-		from user u, board b
-		where u.idx = b.user_idx and b.post_category_idx != 5
-		order by b.idx desc
-		limit #{pageStart}, #{perPageNum}
+		SELECT a.name, b.idx, b.title, b.write_date, b.view_count, b.content,
+			(SELECT COUNT(*) FROM comment WHERE board_idx = b.idx) AS recnt
+		FROM member a, board b
+		WHERE a.idx = b.user_idx
+		ORDER BY b.idx DESC
+		LIMIT #{pageStart}, #{perPageNum}
 		]]>
 	</select>
 	
 	<select id="countPaging" resultType="int">
 		<![CDATA[
-		SELECT count(b.idx)
-		from user u, board b
-		where u.idx = b.user_idx and b.post_category_idx != 5
+		SELECT COUNT(b.idx)
+		FROM member a, board b
+		WHERE a.idx = b.user_idx
 		]]>
 	</select>
 	
 	<select id="listSearch" resultType="BoardVO">
-		SELECT u.name, b.idx, b.title, b.write_date, b.view_count, b.content,
-			(SELECT COUNT(*) FROM comment where board_idx = b.idx) AS recnt
-		from user u, board b
-		where u.idx = b.user_idx and b.post_category_idx != 5 and ${searchType} like CONCAT('%', #{keyword}, '%')
-		order by b.idx desc
-		limit #{pageStart}, #{perPageNum}
+		SELECT a.name, b.idx, b.title, b.write_date, b.view_count, b.content,
+			(SELECT COUNT(*) FROM comment WHERE board_idx = b.idx) AS recnt
+		FROM member a, board b
+		WHERE a.idx = b.user_idx AND ${searchType} LIKE CONCAT('%', #{keyword}, '%')
+		ORDER BY b.idx DESC
+		LIMIT #{pageStart}, #{perPageNum}
 	</select>
 	
 	<select id="listSearchCount" resultType="int">
 		SELECT count(b.idx)
-		from user u, board b
-		where u.idx = b.user_idx and b.post_category_idx != 5 and ${searchType} like CONCAT('%', #{keyword}, '%')
+		FROM member a, board b
+		WHERE a.idx = b.user_idx AND ${searchType} LIKE CONCAT('%', #{keyword}, '%')
 	</select>
 </mapper>

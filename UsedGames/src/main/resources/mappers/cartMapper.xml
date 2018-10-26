@@ -28,11 +28,11 @@
             (price * quantity) AS cost
         FROM
             cart a
-            inner join game b on a.game_idx = b.idx
-            inner join member c on a.user_idx = c.idx
+            INNER JOIN game b ON a.game_idx = b.idx
+            INNER JOIN member c ON a.user_idx = c.idx
         WHERE a.user_idx = #{userIdx}
         ORDER BY
-            a.idx
+            a.idx DESC
     </select>
     
     <!-- 3. 장바구니 전체 금액 -->

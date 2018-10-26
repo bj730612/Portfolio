@@ -13,10 +13,10 @@
 
 <!-- 댓글 리스트 -->
 	<select id="selectReview" resultType="ReviewVO">
-		SELECT u.name, r.content, r.write_date
-		from user u, review r
-		where r.board_idx = #{boardIdx} and u.idx = r.user_idx
-		order by r.write_date desc;
+		SELECT a.name, b.content, b.write_date
+		FROM member a, review b
+		WHERE b.board_idx = #{boardIdx} AND a.idx = b.user_idx
+		ORDER BY b.write_date DESC;
 	</select>
 	
 </mapper>

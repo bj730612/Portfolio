@@ -25,19 +25,19 @@
 	</div>
 </header>
 <body style="margin: auto; width: 900px;">
-<script>
-var frm;
+<!-- <script>
+// var frm;
 
-$(document).ready(function(){}){
-  frm = $("frm");
-}
+// $(document).ready(function(){}){
+//   frm = $("frm");
+// }
 	
-function add_review() {
- 	frm.action = "<c:url value='/review/insertReview.do'/>";
- 	frm.submit();
- 	alert("hello")
-}
-</script>
+// function add_review() {
+//  	frm.action = "<c:url value='/review/insertReview.do'/>";
+//  	frm.submit();
+//  	alert("hello")
+// }
+</script> -->
 	<div style="position: relative; z-index: 1; padding-top: 160px;">
 		<div class="d-flex">
 			<div class="d-inline">
@@ -72,20 +72,23 @@ function add_review() {
 			<p>상세 정보</p>
 			<img src="/resources/uploadFile/image/${gameVO[0].subImage}">
 		</div>
-		<div>
-			<form name="frm">
-				<input type="hidden" name="boardIdx" value="${gameVO[0].boardIdx}">
-				<div>
-					<span><strong>상품평</strong></span> <span id="cCnt"></span>
-				</div>
-				<div>
-					<input type="text" id="review" name="review" placeholder="상품평을 입력 해 주세요."> <br>
-					<div>
-						<a href='#' onClick="add_review()" class="btn pull-right btn-success">평가 등록</a>
-		            </div>
-				</div>
-			</form>
-		</div>
+ 		<div>
+ 			<%@include file="../review/review.jsp" %>
+ 		</div>
+<!-- 		<div> -->
+<!-- 			<form name="frm"> -->
+<%-- 				<input type="hidden" name="boardIdx" value="${gameVO[0].boardIdx}"> --%>
+<!-- 				<div> -->
+<!-- 					<span><strong>상품평</strong></span> <span id="cCnt"></span> -->
+<!-- 				</div> -->
+<!-- 				<div> -->
+<!-- 					<input type="text" id="review" name="review" placeholder="상품평을 입력 해 주세요."> <br> -->
+<!-- 					<div> -->
+<!-- 						<a href='#' onClick="add_review()" class="btn pull-right btn-success">평가 등록</a> -->
+<!-- 		            </div> -->
+<!-- 				</div> -->
+<!-- 			</form> -->
+<!-- 		</div> -->
 		<div>
 			<p>상품문의</p>
 <%-- 			<%@include file="../question/question.jsp" %> --%>
