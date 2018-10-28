@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.zerock.domain.BoardVO;
 import org.zerock.domain.ReviewVO;
 import org.zerock.persistence.ReviewDAO;
 
@@ -24,6 +25,18 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public List<ReviewVO> selectReview(int boardIdx) throws Exception {	
 		return reviewDAO.selectReview(boardIdx);
+	}
+	
+	//게시글 수정
+	@Override
+	public void updateReview(ReviewVO reviewVO) throws Exception {
+		reviewDAO.updateReview(reviewVO);
+	}
+	
+	//게시글 삭제
+	@Override
+	public void deleteReview(int idx) throws Exception {
+		reviewDAO.deleteReview(idx);
 	}
 	
 }

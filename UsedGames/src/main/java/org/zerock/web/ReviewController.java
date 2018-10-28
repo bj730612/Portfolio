@@ -12,11 +12,13 @@ import org.json.JSONArray;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.ReviewVO;
 import org.zerock.domain.UserVO;
 import org.zerock.service.ReviewService;
@@ -33,14 +35,10 @@ public class ReviewController{
 	@ResponseBody
 	public String insertReview(ReviewVO reviewVO, @RequestParam("boardIdx") int boardIdx, HttpServletRequest request) throws Exception {
 		
-		System.out.println(1);
-		
 		HttpSession session = request.getSession();
 		
 		//濡쒓렇�씤 �깉�뀡 �젙蹂� 媛��졇�삤湲�
 		UserVO userVO = (UserVO)session.getAttribute("login");
-		
-		System.out.println(boardIdx);
 		
 		try {
 			reviewVO.setUserIdx(userVO.getIdx());
@@ -48,7 +46,7 @@ public class ReviewController{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:../game/gameInfo.do";
+		return "success";
 	}
 	
 	//�뙎湲� 由ъ뒪�듃 
@@ -75,4 +73,21 @@ public class ReviewController{
         JSONArray json = new JSONArray(hmlist);
         return new ResponseEntity(json.toString(), responseHeaders, HttpStatus.CREATED);
 	}
+	
+//	@RequestMapping(value="/deleteBoard.do", method=RequestMethod.POST)
+//	public String deleteBoard(@RequestParam("boardIdx") int idx, RedirectAttributes rttr) throws Exception {
+//		
+//		//게시글 삭제 후 "SUCCESS메세지 보내기
+//		boardService.deleteBoard(idx);
+//		rttr.addFlashAttribute("msg", "SUCCESS");
+//		
+//		return "redirect:/board/listAll.do";
+//	}
+//	
+//	//게시글 수정
+//	@RequestMapping(value="/updateReview.do", method=RequestMethod.GET)
+//	public void updateReview(@RequestParam("idx") int idx, Model model) throws Exception {
+//		
+//		model.addAttribute(ReviewService.readReview(idx));
+//	}
 }

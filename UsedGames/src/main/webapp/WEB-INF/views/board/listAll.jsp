@@ -7,9 +7,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/bootstrap.css">
 
 </head>
@@ -39,11 +39,11 @@
 	<c:forEach var="post" items="${posts}">
 		<div style="border:1px solid blue; display:inline-block;">
 			<div style="border:1px solid red;">${post.idx}</div>
-			<a href="/board/readBoard.do${pm.makeQuery(pm.cri.page)}&boardIdx=${post.idx}"><div style="border:1px solid red;">${post.title}
-<%-- 				<c:if test="${post.recnt > 0}"> --%>
+			<a href="/board/readBoard.do${pm.makeQuery(pm.cri.page)}&boardIdx=${post.idx}">${post.title}
+				<c:if test="${post.recnt > 0}">
 					<span style="color:red;">(${post.recnt})</span>
-<%-- 				</c:if> --%>
-			</div></a>
+ 				</c:if>
+			</a>
 			<div style="border:1px solid red;">${post.name}</div>
 			<div style="border:1px solid red;">${post.viewCount}</div>
 			<div style="border:1px solid red;">

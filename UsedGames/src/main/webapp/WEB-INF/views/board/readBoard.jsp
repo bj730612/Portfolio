@@ -49,7 +49,7 @@
 		<button type="button" class="btn-primary">리스트로</button>
 	</div>
 	
-	<form role="form" action="/board/listAll.do", method="GET">
+	<form role="form" action="/board/listAll.do" method="GET">
 		<input type="hidden" name="boardIdx" value="${boardVO.idx}">
 		<input type="hidden" name="page" value="${cri.page}">
 		<input type="hidden" name="perPageNum" value="${cri.perPageNum}">

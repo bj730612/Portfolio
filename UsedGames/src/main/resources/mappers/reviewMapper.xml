@@ -5,18 +5,29 @@
 
 <mapper namespace="org.zerock.mapper.ReviewMapper">
 
-<!-- 댓글 등록 -->
+<!-- 등록 -->
 	<insert id="insertReview">
-		INSERT INTO review (board_idx, user_idx, content)
+		INSERT INTO review (board_idx, member_idx, content)
 		VALUES (#{boardIdx}, #{userIdx}, #{content})
 	</insert>
 
-<!-- 댓글 리스트 -->
+<!-- 리스트 -->
 	<select id="selectReview" resultType="ReviewVO">
 		SELECT a.name, b.content, b.write_date
 		FROM member a, review b
-		WHERE b.board_idx = #{boardIdx} AND a.idx = b.user_idx
+		WHERE b.board_idx = #{boardIdx} AND a.idx = b.member_idx
 		ORDER BY b.write_date DESC;
 	</select>
+	
+<!-- 수정 -->
+	<update id="updateReview">
+		UPDATE board SET content = #{content}
+		WHERE idx = #{idx} AND member_idx = #{userIdx}
+	</update>
+
+<!-- 삭제 -->
+	<delete id="deleteReview">
+		DELETE FROM review WHERE idx = #{idx} AND member_idx = #{#{userIdx}
+	</delete>
 	
 </mapper>

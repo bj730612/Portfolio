@@ -55,7 +55,7 @@ function getCommentList() {
 				for (i = 0; i < data.length; i++) {
 					html += "<div>";
 					html += "<div><table class='table'><h6><strong>"+ data[i].name + "</strong></h6>";
-					html += data[i].comment+ "<tr><td></td></tr>";
+					html += data[i].content+ "<tr><td></td></tr>";
 					html += "</table></div>";
 					html += "</div>";
 				}
@@ -81,7 +81,7 @@ function getCommentList() {
 			<span><strong>Comments</strong></span> <span id="cCnt"></span>
 		</div>
 		<div>
-			<input type="text" id="comment" name="comment" placeholder="댓글을 입력 해 주세요."> <br>
+			<input type="text" id="content" name="content" placeholder="댓글을 입력 해 주세요."> <br>
 			<div>
 				<a href='#' onClick="add_comment('${boardVO.idx}')" class="btn pull-right btn-success">댓글 등록</a>
             </div>

@@ -3,11 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.zerock.mapper.CartMapper">
+<mapper namespace="org.zerock.mapper.OrderMapper">
 
     <!-- 1. 장바구니 추가 -->
-    <insert id="insertCart">
-        INSERT INTO cart (
+    <insert id="insertOrder">
+        INSERT INTO order (
             member_idx
           , game_idx
           , game_board_idx
@@ -17,7 +17,7 @@
     </insert>
     
     <!-- 2. 장바구니 목록 -->
-    <select id="listCart" resultType="CartVO">
+    <select id="listOrder" resultType="OrderVO">
         SELECT
             a.idx,
             a.member_idx AS userIdx,
@@ -27,7 +27,7 @@
             b.price AS price, 
             (price * quantity) AS cost
         FROM
-            cart a
+            order a
             INNER JOIN game b ON a.game_idx = b.idx
             INNER JOIN member c ON a.member_idx = c.idx
         WHERE a.member_idx = #{userIdx}
@@ -38,36 +38,36 @@
     <!-- 3. 장바구니 전체 금액 -->
     <select id="sumCost" resultType="int">
         SELECT IFNULL(SUM(price * quantity), 0) AS cost
-        FROM cart a
+        FROM order a
         inner join game b on a.game_idx = b.idx 
         WHERE a.member_idx = #{userIdx}
     </select>
     
     <!-- 4. 장바구니 수정 -->
-    <update id="updateCart">
-        UPDATE cart    
+    <update id="updateOrder">
+        UPDATE order    
         SET quantity = #{quantity} 
         WHERE member_idx= #{userIdx} 
         AND game_idx = #{gameIdx}
     </update>
     
     <!-- 5. 장바구니 삭제 -->
-    <delete id="deleteCart">
-        DELETE FROM cart 
-        WHERE idx = #{cartIdx}
+    <delete id="deleteOrder">
+        DELETE FROM order 
+        WHERE idx = #{orderIdx}
     </delete>
     
     <!-- 6. 장바구니에 동일한 상품 레코드 확인 -->
-    <select id="countCart" resultType="int">
+    <select id="countOrder" resultType="int">
         SELECT COUNT(*)
-        FROM cart
+        FROM order
         WHERE member_idx= #{userIdx}
         AND game_idx = #{gameIdx}
     </select>
     
     <!-- 7. 장바구니에 동일한 상품이 존재하면 수정 -->
-    <update id="duplicateUpdateCart">
-        UPDATE cart 
+    <update id="duplicateUpdateOrder">
+        UPDATE order 
         SET quantity = quantity + #{quantity} 
         WHERE member_idx= #{userIdx} 
         AND game_idx = #{gameIdx}
