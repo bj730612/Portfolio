@@ -8,7 +8,7 @@ public class QuestionVO {
 	private int userIdx;
 	private int boardIdx;
 	private String name;
-	private String comment;
+	private String content;
 	private Date writeDate;
 	private Date updateDate;
 
@@ -44,12 +44,12 @@ public class QuestionVO {
 		this.boardIdx = boardIdx;
 	}
 
-	public String getComment() {
-		return comment;
+	public String getContent() {
+		return content;
 	}
 
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public Date getWriteDate() {

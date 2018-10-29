@@ -62,8 +62,7 @@
  			<%@include file="../review/review.jsp" %>
  		</div>
 		<div>
-			<p>상품문의</p>
-<%-- 			<%@include file="../question/question.jsp" %> --%>
+			<%@include file="../question/question.jsp" %>
 		</div>
 	</div>
 </body>
