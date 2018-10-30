@@ -8,13 +8,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.WebUtils;
-import org.zerock.domain.UserVO;
-import org.zerock.service.UserService;
+import org.zerock.domain.MemberVO;
+import org.zerock.service.MemberService;
 
 public class AuthInterceptor extends HandlerInterceptorAdapter {
 	
 	@Inject
-	private UserService userService;
+	private MemberService memberService;
 	
 	private String saveDest(HttpServletRequest req) {
 		
@@ -47,11 +47,11 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			
 			//�옄�룞 濡쒓렇�씤 荑좏궎 �쑀臾� �솗�씤
 			if(loginCookie != null) {
-				UserVO userVO = userService.checkLoginBefore(loginCookie.getValue());
+				MemberVO memberVO = memberService.checkLoginBefore(loginCookie.getValue());
 				
 				//�쑀�� �젙蹂� �쑀臾� �솗�씤
-				if(userVO != null) {
-					session.setAttribute("login", userVO);
+				if(memberVO != null) {
+					session.setAttribute("login", memberVO);
 					
 					// �젒�냽�븳 �럹�씠吏� �솗�씤
 					if(url.equals("/main.do")) {
@@ -64,7 +64,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			if(url.equals("/main.do")) {
 				return true;
 			}else {
-				response.sendRedirect("/user/login.do");
+				response.sendRedirect("/member/login.do");
 				return false;
 			}
 		}

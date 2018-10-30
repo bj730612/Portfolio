@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +18,17 @@
 	float: left;
 }
 </style>
+<script>
+function btn(val) {
+	console.log(val);
+	var frm = document.form
+	if (val == 1) {
+		frm.action="/cart/insertCart.do";
+	} else if (val == 2) {
+		frm.action="/order/insertOrder.do";
+	}
+}
+</script>
 </head>
 <header style="height: 160px; position: fixed; z-index: 9999;">
 	<div>
@@ -24,6 +36,7 @@
 	</div>
 </header>
 <body style="margin: auto; width: 900px;">
+
 	<div style="position: relative; z-index: 1; padding-top: 160px;">
 		<div class="d-flex">
 			<div class="d-inline">
@@ -37,20 +50,18 @@
 					<p>${gameVO[0].price}</p>
 				</div>
 				<div>
-					<input type="hidden" name="gameIdx" value="${gameVO[0].idx}">
-					<input type="hidden" name="userIdx" value="${gameVO[0].userIdx}">
-					<input type="hidden" name="boardIdx" value="${gameVO[0].boardIdx}">
-					<select name="quantity">
-						<c:forEach begin="1" end="10" var="i">
-							<option value="${i}">${i}</option>
-						</c:forEach>
-					</select>&nbsp;개
-					<form name="form1" method="get" action="/cart/insertCart.do">
-						<input type="submit" value="장바구니">
+					<form name="form" method="get">
+						<input type="hidden" name="gameIdx" value="${gameVO[0].idx}">
+						<input type="hidden" name="memberIdx" value="${gameVO[0].memberIdx}">
+						<input type="hidden" name="boardIdx" value="${gameVO[0].boardIdx}">
+						<select name="quantity">
+							<c:forEach begin="1" end="10" var="i">
+								<option value="${i}">${i}</option>
+							</c:forEach>
+						</select>&nbsp;개
+						<input type="button" value="장바구니" onclick="btn(1);">
+						<input type="button" value="주문하기" onclick="btn(2);">
 					</form>
-					<form name="form2" method="get" action="/order/insertOrder.do">
-						<input type="submit" value="주문하기">
-					</form>					
 				</div>
 			</div>
 		</div>

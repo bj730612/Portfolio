@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.zerock.domain.GameVO;
-import org.zerock.domain.ReviewVO;
-import org.zerock.domain.UserVO;
 import org.zerock.service.GameService;
 
 @RequestMapping("/game")

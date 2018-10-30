@@ -5,7 +5,7 @@ import java.util.Date;
 public class ReviewVO {
 
 	private int idx;
-	private int userIdx;
+	private int memberIdx;
 	private int boardIdx;
 	private String name;
 	private String content;
@@ -18,11 +18,11 @@ public class ReviewVO {
 	public void setIdx(int idx) {
 		this.idx = idx;
 	}
-	public int getUserIdx() {
-		return userIdx;
+	public int getMemberIdx() {
+		return memberIdx;
 	}
-	public void setUserIdx(int userIdx) {
-		this.userIdx = userIdx;
+	public void setMemberIdx(int memberIdx) {
+		this.memberIdx = memberIdx;
 	}
 	public int getBoardIdx() {
 		return boardIdx;

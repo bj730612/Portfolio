@@ -7,27 +7,35 @@
 
 <!-- 등록 -->
 	<insert id="insertQuestion">
-		INSERT INTO question (board_idx, member_idx, content)
-		VALUES (#{boardIdx}, #{userIdx}, #{content})
+		INSERT INTO question (
+			board_idx
+		  , member_idx
+		  , content)
+		VALUES (
+			#{boardIdx}
+		  , #{memberIdx}
+		  , #{content})
 	</insert>
 
 <!-- 리스트 -->
 	<select id="selectQuestion" resultType="QuestionVO">
 		SELECT a.name, b.content, b.write_date
-		FROM member a, question b
-		WHERE b.board_idx = #{boardIdx} AND a.idx = b.member_idx
+		FROM member a
+			INNER JOIN question b ON a.idx = b.member_idx
+		WHERE b.board_idx = #{boardIdx}
 		ORDER BY b.write_date DESC;
 	</select>
 	
 <!-- 수정 -->
 	<update id="updateQuestion">
 		UPDATE board SET content = #{content}
-		WHERE idx = #{idx} AND member_idx = #{userIdx}
+		WHERE idx = #{idx} AND member_idx = #{memberIdx}
 	</update>
 
 <!-- 삭제 -->
 	<delete id="deleteQuestion">
-		DELETE FROM question WHERE idx = #{idx} AND member_idx = #{userIdx}
+		DELETE FROM question
+		WHERE idx = #{idx} AND member_idx = #{memberIdx}
 	</delete>
 	
 </mapper>

@@ -1,4 +1,4 @@
-package org.zerock.service;
+package org.zerock.persistence;
 
 import java.util.Date;
 import java.util.List;
@@ -9,12 +9,15 @@ import org.zerock.domain.BoardVO;
 import org.zerock.domain.CartVO;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.LoginDTO;
-import org.zerock.domain.UserVO;
+import org.zerock.domain.MemberVO;
 
-public interface UserService {
+public interface MemberDAO {
+
+	//회원가입
+	public void insertMember(MemberVO memberVO) throws Exception;
 
 	//로그인 체크
-	public UserVO login(LoginDTO loginDTO) throws Exception;
+	public MemberVO login(LoginDTO loginDTO) throws Exception;
 
 	//로그아웃
 	public void logout(HttpSession session) throws Exception;
@@ -23,24 +26,27 @@ public interface UserService {
 	public void keepLogin(String email, String sessionId, Date next) throws Exception;
 
 	//세션키
-	public UserVO checkLoginBefore(String value) throws Exception;
+	public MemberVO checkMemberWithSessionKey(String value) throws Exception;
 	
-	//장바구니 추가
+	// 게시글 추가
 	public void insertCart(CartVO cartVO) throws Exception;
-		
-	//장바구니 수정
+	
+	// 게시글 수정
 	public void updateCart(CartVO cartVO) throws Exception;
 	
-	//장바구니 삭제
+	// 게시글 삭제
 	public void deleteCart(int idx) throws Exception;
 	
-	//게시글 조회
+	// 게시글 조회
 	public CartVO readCart(int idx) throws Exception;
 	
-	//장바구니 리스트
+	//게시글 리스트
 	public List<CartVO> listCriteria(Criteria cri) throws Exception;
 	
-	//장바구니 카운트
-	public int listCountCriteria(Criteria cri) throws Exception;
+	//게시글 카운트
+	public int countPaging(Criteria cri) throws Exception;
+	
+	//게시글 조회수 
+	public int viewCount(int idx) throws Exception;
 
 }

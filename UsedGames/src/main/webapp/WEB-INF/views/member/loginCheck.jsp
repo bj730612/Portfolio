@@ -8,7 +8,7 @@
 <body>
 	<script type="text/javascript">
 		alert("아이디와 비밀번호를 확인해주세요.");
-		self.location = "/user/login.do";
+		self.location = "/member/login.do";
 	</script>
 </body>
 </html>

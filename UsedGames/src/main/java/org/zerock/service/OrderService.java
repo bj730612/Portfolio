@@ -12,9 +12,9 @@ public interface OrderService {
 	
 	public void deleteOrder(int idx) throws Exception;
 	
-	public List<OrderVO> listOrder(int userIdx) throws Exception;
+	public List<OrderVO> listOrder(int memberIdx) throws Exception;
 	
-	public int sumCost(int userIdx) throws Exception;
+	public int sumCost(int memberIdx) throws Exception;
 	
 	public void duplicateUpdateOrder(OrderVO orderVO) throws Exception;
 

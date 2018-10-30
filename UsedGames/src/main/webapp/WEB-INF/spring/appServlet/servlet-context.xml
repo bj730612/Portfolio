@@ -34,9 +34,9 @@
 	<interceptors>
 	
 		<interceptor>
-			<mapping path="/user/loginCheck.do"/>
-			<!-- <mapping path="/user/signUp.do"/> -->
-			<mapping path="/user/login.do"/>
+			<mapping path="/member/loginCheck.do"/>
+			<!-- <mapping path="/member/signUp.do"/> -->
+			<mapping path="/member/login.do"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 		

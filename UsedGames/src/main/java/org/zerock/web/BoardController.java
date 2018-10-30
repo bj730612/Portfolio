@@ -18,7 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.BoardVO;
 import org.zerock.domain.PageMaker;
 import org.zerock.domain.SearchVO;
-import org.zerock.domain.UserVO;
+import org.zerock.domain.MemberVO;
 import org.zerock.service.BoardService;
 
 @RequestMapping("/board")
@@ -40,9 +40,9 @@ public class BoardController {
 	public String insertBoard(MultipartHttpServletRequest request, Model model, BoardVO boardVO, HttpSession session) throws Exception {
 		
 		//로그인 세션 정보
-		UserVO userVO = (UserVO)session.getAttribute("login");
+		MemberVO memberVO = (MemberVO)session.getAttribute("login");
 		
-		boardVO.setUserIdx(userVO.getIdx());
+		boardVO.setMemberIdx(memberVO.getIdx());
 		
 		//이미지 파일 등록
 		MultipartFile mf = request.getFile("image_file");

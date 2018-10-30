@@ -20,19 +20,19 @@ import org.zerock.domain.CartVO;
 import org.zerock.domain.LoginDTO;
 import org.zerock.domain.PageMaker;
 import org.zerock.domain.SearchVO;
-import org.zerock.domain.UserVO;
-import org.zerock.persistence.UserDAO;
-import org.zerock.service.UserService;
+import org.zerock.domain.MemberVO;
+import org.zerock.persistence.MemberDAO;
+import org.zerock.service.MemberService;
 
-@RequestMapping("/user")
+@RequestMapping("/member")
 @Controller
-public class UserController {
+public class MemberController {
 	
 	@Inject
-	private UserDAO userDAO;
+	private MemberDAO memberDAO;
 	
 	@Inject 
-	private UserService userService;
+	private MemberService memberService;
 
 	//�쉶�썝媛��엯 �럹�씠吏�
 	@RequestMapping(value="/signUp.do", method=RequestMethod.GET)
@@ -40,11 +40,11 @@ public class UserController {
 	
 	//�쉶�썝媛��엯
 	@RequestMapping(value="/signUp.do", method=RequestMethod.POST)
-	public String signUp(UserVO userVO) throws Exception {
+	public String signUp(MemberVO memberVO) throws Exception {
 		
-		userDAO.insertUser(userVO);
+		memberDAO.insertMember(memberVO);
 		
-		return "redirect:/user/login.do";
+		return "redirect:/member/login.do";
 	}
 	
 	//濡쒓렇�씤 �럹�씠吏�
@@ -63,14 +63,14 @@ public class UserController {
 		}
 		
 		//濡쒓렇�씤
-		UserVO userVO = userService.login(loginDTO);
+		MemberVO memberVO = memberService.login(loginDTO);
 		
 		//濡쒓렇�씤 �떎�뙣
-		if(userVO == null) {
+		if(memberVO == null) {
 			return;
 		}
 
-		model.addAttribute("userVO", userVO);
+		model.addAttribute("memberVO", memberVO);
 		
 		// �옄�룞 濡쒓렇�씤 泥댄겕 �솗�씤
 		if(loginDTO.isUseCookie()) {
@@ -78,7 +78,7 @@ public class UserController {
 			int amount = 60 * 60 * 24 * 7;
 			Date sessionLimit = new Date(System.currentTimeMillis() + (1000*amount));
 			
-			userService.keepLogin(userVO.getEmail(), session.getId(), sessionLimit);
+			memberService.keepLogin(memberVO.getEmail(), session.getId(), sessionLimit);
 			
 		}
 	}
@@ -91,7 +91,7 @@ public class UserController {
 		
 		//濡쒓렇�씤 �꽭�뀡�젙蹂닿� �엳�쓣寃쎌슦
 		if(obj != null) {
-			UserVO userVO = (UserVO) obj;
+			MemberVO memberVO = (MemberVO) obj;
 			
 			session.removeAttribute("login");
 			session.invalidate();
@@ -103,9 +103,9 @@ public class UserController {
 				logincookie.setPath("/");
 				logincookie.setMaxAge(0);
 				response.addCookie(logincookie);
-				userService.keepLogin(userVO.getEmail(), session.getId(), new Date());
+				memberService.keepLogin(memberVO.getEmail(), session.getId(), new Date());
 			}
 		}
-		return "/user/logout";
+		return "/member/logout";
 	}
 }

@@ -117,7 +117,7 @@
    $(document).ready(function(){
        // 리스트 페이지로 이동
        $("#btnList").click(function(){
-           location.href="/user/orderList.do";
+           location.href="/member/orderList.do";
        });
    });
 </script>

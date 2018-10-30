@@ -34,8 +34,8 @@
 			</div>
 			<div id="login_check" class="d-flex justify-content-end">
 				<c:if test="${login.email == null}">
-					<a href="/user/login.do">로그인&nbsp</a>
-					<a href="/user/signUp.do">회원가입&nbsp</a>
+					<a href="/member/login.do">로그인&nbsp</a>
+					<a href="/member/signUp.do">회원가입&nbsp</a>
 					<div class="dropdown d-inline">
 						<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">고객센터</a>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -48,7 +48,7 @@
 				</c:if>
 				<c:if test="${login.email != null}">
 				<h6>${login.name}님 환영합니다.</h6>
-					<a href="/user/logout.do">로그아웃&nbsp</a>
+					<a href="/member/logout.do">로그아웃&nbsp</a>
 					<div class="dropdown d-inline">
 						<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">고객센터</a>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">

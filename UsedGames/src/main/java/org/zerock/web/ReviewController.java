@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.ReviewVO;
-import org.zerock.domain.UserVO;
+import org.zerock.domain.MemberVO;
 import org.zerock.service.ReviewService;
 
 @RestController
@@ -38,10 +38,10 @@ public class ReviewController{
 		HttpSession session = request.getSession();
 		
 		//濡쒓렇�씤 �깉�뀡 �젙蹂� 媛��졇�삤湲�
-		UserVO userVO = (UserVO)session.getAttribute("login");
+		MemberVO memberVO = (MemberVO)session.getAttribute("login");
 		
 		try {
-			reviewVO.setUserIdx(userVO.getIdx());
+			reviewVO.setMemberIdx(memberVO.getIdx());
 			reviewService.insertReview(reviewVO);
 		} catch (Exception e) {
 			e.printStackTrace();

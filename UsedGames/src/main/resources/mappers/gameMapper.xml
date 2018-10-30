@@ -19,11 +19,12 @@
 			 , c.view_count
 			 , c.image
 			 , d.name
-			FROM game a INNER JOIN game_type b ON a.idx = b.game_idx
-						INNER JOIN board c ON c.idx = a.board_idx  
-						INNER JOIN member d ON d.idx = c.user_idx
-			GROUP BY a.title
-			ORDER BY a.idx DESC
+		FROM game a
+			INNER JOIN game_type b ON a.idx = b.game_idx
+			INNER JOIN board c ON c.idx = a.board_idx  
+			INNER JOIN member d ON d.idx = c.member_idx
+		GROUP BY a.title
+		ORDER BY a.idx DESC
 	</select>
 	
 <!-- 게임 카테고리2 -->
@@ -45,16 +46,16 @@
 			 , a.title
 			 , a.price
 			 , a.board_idx
-			 , c.name as company_name
-			 , d.name as device_name
-		 	 , e.name as type_name
-		 	 , f.name as genre_name
+			 , c.name AS company_name
+			 , d.name AS device_name
+		 	 , e.name AS type_name
+		 	 , f.name AS genre_name
 		FROM game a
-			 inner join game_type b ON a.idx = b.game_idx
-			 inner join category2 d ON b.category2_idx = d.idx
-			 inner join category c ON d.category_idx = c.idx
-			 inner join category3 e ON b.category3_idx = e.idx
-			 inner join genre f ON b.genre_idx = f.idx
+			 INNER JOIN game_type b ON a.idx = b.game_idx
+			 INNER JOIN category2 d ON b.category2_idx = d.idx
+			 INNER JOIN category c ON d.category_idx = c.idx
+			 INNER JOIN category3 e ON b.category3_idx = e.idx
+			 INNER JOIN genre f ON b.genre_idx = f.idx
 		WHERE 1=1
 		<if test="device_idx != null">
 		AND d.idx IN (#{device_idx})
@@ -69,7 +70,7 @@
 			 , a.title
 			 , a.price
 			 , a.board_idx
-			 , b.user_idx
+			 , b.member_idx
 			 , b.view_count
 			 , b.image
 			 , b.sub_image

@@ -1,8 +1,6 @@
 package org.zerock.web;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import org.zerock.domain.CartVO;
-import org.zerock.domain.UserVO;
+import org.zerock.domain.MemberVO;
 import org.zerock.service.CartService;
 
 @RequestMapping("/cart")
@@ -31,11 +28,11 @@ public class CartController {
     public String insertCart(@ModelAttribute CartVO cartVO, HttpServletRequest request) throws Exception{
     	
     	HttpSession session = request.getSession();
-    	UserVO userVO = (UserVO)session.getAttribute("login");    	
-    	int userIdx = userVO.getIdx();
+    	MemberVO memberVO = (MemberVO)session.getAttribute("login");    	
+    	int memberIdx = memberVO.getIdx();
 
         // 장바구니에 기존 상품이 있는지 검사
-    	cartVO.setUserIdx(userIdx);
+    	cartVO.setMemberIdx(memberIdx);
         int count = cartService.countCart(cartVO);
 
         if(count == 0){
@@ -54,12 +51,12 @@ public class CartController {
     public String list(Model model, HttpServletRequest request) throws Exception{
     	HttpSession session = request.getSession();
     	
-    	UserVO userVO = (UserVO)session.getAttribute("login");
+    	MemberVO memberVO = (MemberVO)session.getAttribute("login");
     	
-    	int userIdx = userVO.getIdx();
+    	int memberIdx = memberVO.getIdx();
 
-		List<CartVO> list = cartService.listCart(userIdx); // 장바구니 정보 
-        int sumCost = cartService.sumCost(userIdx); // 장바구니 전체 금액 호출
+		List<CartVO> list = cartService.listCart(memberIdx); // 장바구니 정보 
+        int sumCost = cartService.sumCost(memberIdx); // 장바구니 전체 금액 호출
         // 장바구니 전체 긍액에 따라 배송비 구분
         // 배송료(5만원이상 => 무료, 미만 => 2500원)
         int fee = sumCost >= 50000 ? 0 : 2500;
@@ -69,7 +66,7 @@ public class CartController {
         model.addAttribute("fee", fee);                 // 배송금액
         model.addAttribute("allSum", sumCost+fee);    // 주문 상품 전체 금액
         
-        return "/user/cartList";
+        return "/member/cartList";
     }
 
     // 3. 장바구니 삭제
@@ -86,13 +83,13 @@ public class CartController {
         // session의 id
     	HttpSession session = request.getSession();
     	
-    	UserVO userVO = (UserVO)session.getAttribute("login");
+    	MemberVO memberVO = (MemberVO)session.getAttribute("login");
     	
-    	int userIdx = userVO.getIdx();
+    	int memberIdx = memberVO.getIdx();
         // 레코드의 갯수 만큼 반복문 실행
         for(int i=0; i<gameIdx.length; i++){
             CartVO cartVO = new CartVO();
-            cartVO.setUserIdx(userIdx);
+            cartVO.setMemberIdx(memberIdx);
             cartVO.setQuantity(quantity[i]);
             cartVO.setGameIdx(gameIdx[i]);
             cartService.updateCart(cartVO);

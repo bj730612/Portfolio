@@ -12,15 +12,32 @@
 
 <!-- 게시글 작성 -->
 	<insert id="insertBoard">
-		INSERT INTO board (title, content, image, user_idx, post_category_idx)
-		VALUES (#{title}, #{content}, #{image}, #{userIdx}, #{postCategoryIdx})
+		INSERT INTO board (
+			title
+		  , content
+		  , image
+		  , member_idx
+		  , post_category_idx)
+		VALUES (
+			#{title}
+		  , #{content}
+		  , #{image}
+		  , #{memberIdx}
+		  , #{postCategoryIdx})
 	</insert>
 
 <!-- 게시글 세부내용 -->
 	<select id="readBoard" resultType="BoardVO">
-		SELECT a.name, b.idx, b.title, b.write_date, b.view_count, b.content, b.image
-		FROM member a, board b
-		WHERE a.idx = b.user_idx and b.idx = #{idx}
+		SELECT a.name
+			 , b.idx
+			 , b.title
+			 , b.write_date
+			 , b.view_count
+			 , b.content
+			 , b.image
+		FROM member a
+			INNER JOIN board b ON a.idx = b.member_idx
+		WHERE b.idx = #{idx}
 	</select>
 	
 <!-- 게시글 수정 -->
@@ -36,16 +53,21 @@
 	
 <!-- 게시글 조회수 -->
 	<update id="viewCount">
-		update board set view_count = view_count + 1
-		where idx = #{idx}
+		UPDATE board SET view_count = view_count + 1
+		WHERE idx = #{idx}
 	</update>
 	
 	<select id="listCriteria" resultType="BoardVO">
 		<![CDATA[
-		SELECT a.name, b.idx, b.title, b.write_date, b.view_count, b.content,
-			(SELECT COUNT(*) FROM comment WHERE board_idx = b.idx) AS recnt
-		FROM member a, board b
-		WHERE a.idx = b.user_idx
+		SELECT a.name
+			 , b.idx
+			 , b.title
+			 , b.write_date
+			 , b.view_count
+			 , b.content
+			 , (SELECT COUNT(*) FROM comment WHERE board_idx = b.idx) AS recnt
+		FROM member a
+			INNER JOIN board b ON a.idx = b.member_idx
 		ORDER BY b.idx DESC
 		LIMIT #{pageStart}, #{perPageNum}
 		]]>
@@ -54,23 +76,29 @@
 	<select id="countPaging" resultType="int">
 		<![CDATA[
 		SELECT COUNT(b.idx)
-		FROM member a, board b
-		WHERE a.idx = b.user_idx
+		FROM member a INNER JOIN board b ON a.idx = b.member_idx
 		]]>
 	</select>
 	
 	<select id="listSearch" resultType="BoardVO">
-		SELECT a.name, b.idx, b.title, b.write_date, b.view_count, b.content,
-			(SELECT COUNT(*) FROM comment WHERE board_idx = b.idx) AS recnt
-		FROM member a, board b
-		WHERE a.idx = b.user_idx AND ${searchType} LIKE CONCAT('%', #{keyword}, '%')
+		SELECT a.name
+			 , b.idx
+			 , b.title
+			 , b.write_date
+			 , b.view_count
+			 , b.content
+			 , (SELECT COUNT(*) FROM comment WHERE board_idx = b.idx) AS recnt
+		FROM member a
+			INNER JOIN board b a.idx = b.member_idx
+		WHERE ${searchType} LIKE CONCAT('%', #{keyword}, '%')
 		ORDER BY b.idx DESC
 		LIMIT #{pageStart}, #{perPageNum}
 	</select>
 	
 	<select id="listSearchCount" resultType="int">
 		SELECT count(b.idx)
-		FROM member a, board b
-		WHERE a.idx = b.user_idx AND ${searchType} LIKE CONCAT('%', #{keyword}, '%')
+		FROM member a
+			INNER JOIN board b a.idx = b.member_idx
+		WHERE ${searchType} LIKE CONCAT('%', #{keyword}, '%')
 	</select>
 </mapper>

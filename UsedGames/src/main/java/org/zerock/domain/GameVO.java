@@ -3,7 +3,7 @@ package org.zerock.domain;
 public class GameVO {
 
 	private int idx;
-	private int userIdx;
+	private int memberIdx;
 	private int boardIdx;
 	private String title;
 	private int price;
@@ -27,12 +27,12 @@ public class GameVO {
 		this.boardIdx = boardIdx;
 	}
 
-	public int getUserIdx() {
-		return userIdx;
+	public int getMemberIdx() {
+		return memberIdx;
 	}
 
-	public void setUserIdx(int userIdx) {
-		this.userIdx = userIdx;
+	public void setMemberIdx(int memberIdx) {
+		this.memberIdx = memberIdx;
 	}
 
 	public String getSubImage() {

@@ -2,7 +2,7 @@ package org.zerock.domain;
 
 import java.util.Date;
 
-public class UserVO {
+public class MemberVO {
 
 	private int idx;
 	private String email;

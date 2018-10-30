@@ -14,25 +14,25 @@ import org.zerock.domain.BoardVO;
 import org.zerock.domain.CartVO;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.LoginDTO;
-import org.zerock.domain.UserVO;
+import org.zerock.domain.MemberVO;
 
 @Repository
-public class UserDAOImpl  implements UserDAO {
+public class MemberDAOImpl  implements MemberDAO {
 	
 	@Inject
 	private SqlSession sqlSession;
 	
-	private static final String namespace = "org.zerock.mapper.UserMapper";
+	private static final String namespace = "org.zerock.mapper.MemberMapper";
 	
 	//회원가입
 	@Override
-	public void insertUser(UserVO userVO) throws Exception {
-		sqlSession.insert(namespace+".insertUser", userVO);
+	public void insertMember(MemberVO memberVO) throws Exception {
+		sqlSession.insert(namespace+".insertMember", memberVO);
 	}
 	
 	//회원 로그인 체크
 	@Override
-	public UserVO login(LoginDTO loginDTO) throws Exception {
+	public MemberVO login(LoginDTO loginDTO) throws Exception {
 		return sqlSession.selectOne(namespace+".login", loginDTO);
 	}
 	
@@ -52,8 +52,8 @@ public class UserDAOImpl  implements UserDAO {
 	
 	//세션키
 	@Override
-	public UserVO checkUserWithSessionKey(String value) throws Exception {
-		return sqlSession.selectOne(namespace+".checkUserWithSessionKey", value);
+	public MemberVO checkMemberWithSessionKey(String value) throws Exception {
+		return sqlSession.selectOne(namespace+".checkMemberWithSessionKey", value);
 	}
 	
 	// 게시글 추가

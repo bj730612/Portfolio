@@ -8,46 +8,47 @@
     <!-- 1. 장바구니 추가 -->
     <insert id="insertOrder">
         INSERT INTO order (
-            member_idx
+        	member_idx
           , game_idx
           , game_board_idx
           , quantity )
-        VALUES
-            ( #{userIdx}, #{gameIdx}, #{boardIdx}, #{quantity} )
+        VALUES (
+        	#{memberIdx}
+		  , #{gameIdx}
+		  , #{boardIdx}
+		  , #{quantity} )
     </insert>
     
     <!-- 2. 장바구니 목록 -->
     <select id="listOrder" resultType="OrderVO">
         SELECT
             a.idx,
-            a.member_idx AS userIdx,
+            a.member_idx AS memberIdx,
             a.game_idx As gameIdx,
             a.quantity,
             b.title AS gameTitle, 
             b.price AS price, 
             (price * quantity) AS cost
-        FROM
-            order a
-            INNER JOIN game b ON a.game_idx = b.idx
+        FROM order a
+        	INNER JOIN game b ON a.game_idx = b.idx
             INNER JOIN member c ON a.member_idx = c.idx
-        WHERE a.member_idx = #{userIdx}
-        ORDER BY
-            a.idx DESC
+        WHERE a.member_idx = #{memberIdx}
+        ORDER BY a.idx DESC
     </select>
     
     <!-- 3. 장바구니 전체 금액 -->
     <select id="sumCost" resultType="int">
         SELECT IFNULL(SUM(price * quantity), 0) AS cost
         FROM order a
-        inner join game b on a.game_idx = b.idx 
-        WHERE a.member_idx = #{userIdx}
+        	INNER JOIN game b ON a.game_idx = b.idx 
+        WHERE a.member_idx = #{memberIdx}
     </select>
     
     <!-- 4. 장바구니 수정 -->
     <update id="updateOrder">
         UPDATE order    
         SET quantity = #{quantity} 
-        WHERE member_idx= #{userIdx} 
+        WHERE member_idx= #{memberIdx} 
         AND game_idx = #{gameIdx}
     </update>
     
@@ -61,7 +62,7 @@
     <select id="countOrder" resultType="int">
         SELECT COUNT(*)
         FROM order
-        WHERE member_idx= #{userIdx}
+        WHERE member_idx= #{memberIdx}
         AND game_idx = #{gameIdx}
     </select>
     
@@ -69,7 +70,7 @@
     <update id="duplicateUpdateOrder">
         UPDATE order 
         SET quantity = quantity + #{quantity} 
-        WHERE member_idx= #{userIdx} 
+        WHERE member_idx= #{memberIdx} 
         AND game_idx = #{gameIdx}
     </update>
 </mapper>

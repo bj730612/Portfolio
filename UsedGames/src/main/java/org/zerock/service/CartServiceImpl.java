@@ -21,8 +21,8 @@ public class CartServiceImpl implements CartService {
     }
     //장바구니 목록
     @Override
-    public List<CartVO> listCart(int userIdx) throws Exception {
-        return cartDAO.listCart(userIdx);
+    public List<CartVO> listCart(int memberIdx) throws Exception {
+        return cartDAO.listCart(memberIdx);
     }
     //장바구니 삭제
     @Override
@@ -36,8 +36,8 @@ public class CartServiceImpl implements CartService {
     }
     //장바구니 금액 합계
     @Override
-    public int sumCost(int userIdx) throws Exception {
-        return cartDAO.sumCost(userIdx);
+    public int sumCost(int memberIdx) throws Exception {
+        return cartDAO.sumCost(memberIdx);
     }
     //장바구니 상품 확인
     @Override

@@ -4,7 +4,7 @@ public class OrderVO {
 
 	private int idx;
 	private int quantity;
-	private int userIdx;
+	private int memberIdx;
 	private int gameIdx;
 	private int boardIdx;
 	private String gameTitle;
@@ -41,11 +41,11 @@ public class OrderVO {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	public int getUserIdx() {
-		return userIdx;
+	public int getMemberIdx() {
+		return memberIdx;
 	}
-	public void setUserIdx(int userIdx) {
-		this.userIdx = userIdx;
+	public void setMemberIdx(int memberIdx) {
+		this.memberIdx = memberIdx;
 	}
 	public int getGameIdx() {
 		return gameIdx;
@@ -59,4 +59,5 @@ public class OrderVO {
 	public void setBoardIdx(int boardIdx) {
 		this.boardIdx = boardIdx;
 	}
+
 }

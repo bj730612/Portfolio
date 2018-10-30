@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.zerock.domain.CommentVO;
-import org.zerock.domain.UserVO;
+import org.zerock.domain.MemberVO;
 import org.zerock.service.CommentService;
 
 @RestController
@@ -36,10 +36,10 @@ public class CommentController{
 		HttpSession session = request.getSession();
 		
 		//濡쒓렇�씤 �깉�뀡 �젙蹂� 媛��졇�삤湲�
-		UserVO userVO = (UserVO)session.getAttribute("login");
+		MemberVO memberVO = (MemberVO)session.getAttribute("login");
 		
 		try {
-			commentVO.setUserIdx(userVO.getIdx());
+			commentVO.setMemberIdx(memberVO.getIdx());
 			commentService.insertComment(commentVO);
 		} catch (Exception e) {
 			e.printStackTrace();

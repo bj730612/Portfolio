@@ -26,8 +26,8 @@ public class CartDAOImpl implements CartDAO {
     
     //장바구니 목록
     @Override
-    public List<CartVO> listCart(int userIdx) throws Exception {
-        return sqlSession.selectList(NAMESPACE+".listCart", userIdx);
+    public List<CartVO> listCart(int memberIdx) throws Exception {
+        return sqlSession.selectList(NAMESPACE+".listCart", memberIdx);
     }
     
     //장바구니 삭제
@@ -44,9 +44,9 @@ public class CartDAOImpl implements CartDAO {
     
     //장바구니 금액 합계
     @Override
-    public int sumCost(int userIdx) {
-        sqlSession.selectOne(NAMESPACE + ".sumCost", userIdx);
-        return sqlSession.selectOne(NAMESPACE + ".sumCost", userIdx);
+    public int sumCost(int memberIdx) {
+        sqlSession.selectOne(NAMESPACE + ".sumCost", memberIdx);
+        return sqlSession.selectOne(NAMESPACE + ".sumCost", memberIdx);
     }
     
     //장바구니 동일한 상품 레코드 확인

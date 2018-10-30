@@ -3,16 +3,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.zerock.mapper.UserMapper">
+<mapper namespace="org.zerock.mapper.MemberMapper">
 
 <!-- 회원가입 -->
-	<insert id="insertUser">
-		INSERT INTO member (email, pwd, name, phone)
-		VALUES (#{email}, #{password}, #{name}, #{phone})
+	<insert id="insertmember">
+		INSERT INTO member (
+			email
+		  , pwd
+		  , name
+		  , phone)
+		VALUES (
+			#{email}
+		  , #{password}
+		  , #{name}
+		  , #{phone})
 	</insert>
 	
 <!-- 회원 로그인 체크 -->
-	<select id="login" resultType="UserVO">
+	<select id="login" resultType="memberVO">
 		SELECT * FROM member
 		WHERE email = #{email} AND pwd = #{password}
 	</select>
@@ -24,7 +32,7 @@
 	</update>
 	
 <!-- 세션키 -->
-	<select id="checkUserWithSessionKey" resultType="UserVO">
+	<select id="checkMemberWithSessionKey" resultType="memberVO">
 		SELECT * FROM member
 		WHERE sessionkey = #{value} AND sessionlimit > now()
 	</select>

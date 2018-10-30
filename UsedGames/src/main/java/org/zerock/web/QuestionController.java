@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.zerock.domain.QuestionVO;
-import org.zerock.domain.UserVO;
+import org.zerock.domain.MemberVO;
 import org.zerock.service.QuestionService;
 
 @RestController
@@ -36,10 +36,10 @@ public class QuestionController{
 		HttpSession session = request.getSession();
 		
 		//濡쒓렇�씤 �깉�뀡 �젙蹂� 媛��졇�삤湲�
-		UserVO userVO = (UserVO)session.getAttribute("login");
+		MemberVO memberVO = (MemberVO)session.getAttribute("login");
 		
 		try {
-			questionVO.setUserIdx(userVO.getIdx());
+			questionVO.setMemberIdx(memberVO.getIdx());
 			questionService.insertQuestion(questionVO);
 		} catch (Exception e) {
 			e.printStackTrace();

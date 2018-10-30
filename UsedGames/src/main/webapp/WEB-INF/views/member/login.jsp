@@ -25,7 +25,7 @@ form {
 <div class="d-flex" style="width: 900px; margin: auto; padding-top: 20px;">
 	<a href="/main.do"><img style="width: 200px;" id="main-img" src="../resources/uploadFile/image/ps.png"></a>
 </div>
-<form action="/user/loginCheck.do" method="post">
+<form action="/member/loginCheck.do" method="post">
 	<div class="d-flex justify-content-center pt-20">
 		<input  type="text" class="input-form" name="email" id="email" placeholder="USER ID" />
 	</div>

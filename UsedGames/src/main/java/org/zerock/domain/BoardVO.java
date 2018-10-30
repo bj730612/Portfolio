@@ -10,7 +10,7 @@ public class BoardVO {
 	private int viewCount;
 	private String image;
 	private String subImage;
-	private int userIdx;
+	private int memberIdx;
 	private String name;
 	private Date writeDate;
 	private Date updateDate;
@@ -105,12 +105,12 @@ public class BoardVO {
 		this.subImage = subImage;
 	}
 
-	public int getUserIdx() {
-		return userIdx;
+	public int getMemberIdx() {
+		return memberIdx;
 	}
 
-	public void setUserIdx(int userIdx) {
-		this.userIdx = userIdx;
+	public void setMemberIdx(int memberIdx) {
+		this.memberIdx = memberIdx;
 	}
 
 }

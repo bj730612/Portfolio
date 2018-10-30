@@ -21,8 +21,8 @@ public class OrderServiceImpl implements OrderService {
     }
     //장바구니 목록
     @Override
-    public List<OrderVO> listOrder(int userIdx) throws Exception {
-        return orderDAO.listOrder(userIdx);
+    public List<OrderVO> listOrder(int memberIdx) throws Exception {
+        return orderDAO.listOrder(memberIdx);
     }
     //장바구니 삭제
     @Override
@@ -36,8 +36,8 @@ public class OrderServiceImpl implements OrderService {
     }
     //장바구니 금액 합계
     @Override
-    public int sumCost(int userIdx) throws Exception {
-        return orderDAO.sumCost(userIdx);
+    public int sumCost(int memberIdx) throws Exception {
+        return orderDAO.sumCost(memberIdx);
     }
     //장바구니 상품 확인
     @Override

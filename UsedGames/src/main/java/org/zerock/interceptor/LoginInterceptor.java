@@ -18,10 +18,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		
 		HttpSession session = request.getSession();
 		ModelMap modelMap = mav.getModelMap();
-		Object userVO = modelMap.get("userVO");
+		Object memberVO = modelMap.get("memberVO");
 		
-		if(userVO != null) {
-			session.setAttribute(LOGIN, userVO);
+		if(memberVO != null) {
+			session.setAttribute(LOGIN, memberVO);
 			if(request.getParameter("useCookie") != null) {
 				Cookie loginCookie = new Cookie("loginCookie", session.getId());
 				loginCookie.setPath("/");

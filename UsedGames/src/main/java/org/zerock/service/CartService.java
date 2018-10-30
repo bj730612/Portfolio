@@ -12,9 +12,9 @@ public interface CartService {
 	
 	public void deleteCart(int idx) throws Exception;
 	
-	public List<CartVO> listCart(int userIdx) throws Exception;
+	public List<CartVO> listCart(int memberIdx) throws Exception;
 	
-	public int sumCost(int userIdx) throws Exception;
+	public int sumCost(int memberIdx) throws Exception;
 	
 	public void duplicateUpdateCart(CartVO cartVO) throws Exception;
 

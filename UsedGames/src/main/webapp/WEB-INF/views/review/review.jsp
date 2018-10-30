@@ -11,11 +11,11 @@
 <body>
 <script>
 function add_review(boardIdx) {
-	var userVO = "<%=session.getAttribute("login")%>"
+	var memberVO = "<%=session.getAttribute("login")%>"
 	
-	if(userVO == "null") {
+	if(memberVO == "null") {
 		alert("로그인이 필요합니다.");
-		self.location("/user/login.do");
+		self.location("/member/login.do");
 	} else{
 		$.ajax({
 			type : "POST",
@@ -25,7 +25,7 @@ function add_review(boardIdx) {
 			complete : function(data) {
 				if(data == "success") {
 					alert("상품평이 등록 되었습니다.1");
-					alert(userVO);
+					alert(memberVO);
 					getReviewList();
 				}
 			},
