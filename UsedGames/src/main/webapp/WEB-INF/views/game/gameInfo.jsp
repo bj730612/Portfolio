@@ -20,12 +20,13 @@
 </style>
 <script>
 function btn(val) {
-	console.log(val);
 	var frm = document.form
 	if (val == 1) {
 		frm.action="/cart/insertCart.do";
+		frm.submit();
 	} else if (val == 2) {
-		frm.action="/order/insertOrder.do";
+		frm.action="/order/insertOrder";
+		frm.submit();
 	}
 }
 </script>
