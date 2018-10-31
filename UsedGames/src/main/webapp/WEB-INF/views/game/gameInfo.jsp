@@ -25,7 +25,7 @@ function btn(val) {
 		frm.action="/cart/insertCart.do";
 		frm.submit();
 	} else if (val == 2) {
-		frm.action="/order/insertOrder";
+		frm.action="/order/writeOrder.do";
 		frm.submit();
 	}
 }

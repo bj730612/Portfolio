@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.zerock.domain.OrderVO;
+import org.zerock.domain.GameVO;
 import org.zerock.domain.MemberVO;
+import org.zerock.domain.OrderVO;
+import org.zerock.service.GameService;
 import org.zerock.service.OrderService;
 
 @RequestMapping("/order")
@@ -22,33 +24,51 @@ public class OrderController {
 
     @Inject
     private OrderService orderService;
+    @Inject
+    private GameService gameService;
+    
+    @RequestMapping(value="writeOrder.do", method=RequestMethod.GET)
+    public String writeOrder(Model model, @ModelAttribute GameVO gameVO, HttpServletRequest request) throws Exception{
+    
+    	HttpSession session = request.getSession();
+    	MemberVO memberVO = (MemberVO)session.getAttribute("login");
+    	int gameIdx = Integer.parseInt(request.getParameter("gameIdx"));
+    	gameVO.setIdx(gameIdx);
+    	
+    	List<GameVO> listGameVO = gameService.gameInfo(gameVO);
+    	
+    	int quantity = Integer.parseInt(request.getParameter("quantity"));
+    	int cost = quantity * listGameVO.get(0).getPrice();
+    	System.out.println(gameService.gameInfo(gameVO));
+    	
+    	model.addAttribute("gameVO", listGameVO);
+    	model.addAttribute("quantity", request.getParameter("quantity"));
+    	model.addAttribute("cost", cost);
+    	
+    	int fee = cost >= 100000 ? 0 : 2500;
+        model.addAttribute("fee", fee);                 // 배송금액
+        model.addAttribute("allSum", cost+fee);    // 주문 상품 전체 금액    	
+	
+    	return "/order/writeOrder";
+    }
 
     //장바구니 추가
     @RequestMapping(value="insertOrder.do", method=RequestMethod.GET)
     public String insertOrder(@ModelAttribute OrderVO orderVO, HttpServletRequest request) throws Exception{
     	
     	HttpSession session = request.getSession();
-    	MemberVO memberVO = (MemberVO)session.getAttribute("login");    	
-    	int memberIdx = memberVO.getIdx();
+    	MemberVO memberVO = (MemberVO)session.getAttribute("login");
 
-        // 장바구니에 기존 상품이 있는지 검사
-    	orderVO.setMemberIdx(memberIdx);
-        int count = orderService.countOrder(orderVO);
-
-        if(count == 0){
-            // 없으면 insert
-            orderService.insertOrder(orderVO);
-        } else {
-            // 있으면 update
-            orderService.duplicateUpdateOrder(orderVO);
-        }
-        
+        System.out.println(3);
         return "redirect:orderList.do";
     }
 
     //장바구니 목록
     @RequestMapping(value="orderList.do", method=RequestMethod.GET)
     public String list(Model model, HttpServletRequest request) throws Exception{
+    	
+    	System.out.println(2);
+    	
     	HttpSession session = request.getSession();
     	
     	MemberVO memberVO = (MemberVO)session.getAttribute("login");
@@ -65,6 +85,8 @@ public class OrderController {
         model.addAttribute("sumCost", sumCost);        // 장바구니 전체 금액
         model.addAttribute("fee", fee);                 // 배송금액
         model.addAttribute("allSum", sumCost+fee);    // 주문 상품 전체 금액
+        
+        System.out.println(1);
         
         return "/member/orderList";
     }

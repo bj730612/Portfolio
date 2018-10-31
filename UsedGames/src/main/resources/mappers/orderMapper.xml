@@ -6,77 +6,86 @@
 <mapper namespace="org.zerock.mapper.OrderMapper">
 
     <!-- 1. 주문 추가 -->
-    <insert id="insertOrder">
-        INSERT INTO order (
+    <insert id="insertOrderMt">
+        INSERT INTO order_mt (
         	member_idx
-          , game_idx
-          , game_board_idx
-          , quantity
           , addr
           , phone
           , payment_type )
         VALUES (
         	#{memberIdx}
-		  , #{gameIdx}
-		  , #{boardIdx}
-		  , #{quantity}
 		  , #{addr}
 		  , #{phone}
 		  , #{paymentType} )
     </insert>
     
+    <insert id="insertOrderDt" parameterType="java.util.List">
+    	INSERT INTO order_dt (
+    		sno
+    	  , game_idx
+    	  , quantity )
+		VALUES 
+		<foreach item="item" index="index" collection="list" open="(" separator="),(" close=")">
+			#{item.sno}
+			, #{item.game_idx}
+			, #{item.quantity}
+		</foreach>
+    </insert>
+    
     <!-- 2. 주문 목록 -->
     <select id="listOrder" resultType="OrderVO">
         SELECT
-            a.idx,
-            a.member_idx AS memberIdx,
-            a.game_idx As gameIdx,
-            a.quantity,
-            b.title AS gameTitle, 
-            b.price AS price, 
-            (price * quantity) AS cost
-        FROM order a
-        	INNER JOIN game b ON a.game_idx = b.idx
-            INNER JOIN member c ON a.member_idx = c.idx
+            a.idx
+          , a.member_idx AS memberIdx
+          , b.game_idx As gameIdx
+          , b.quantity
+          , c.title AS gameTitle
+          , c.price AS price
+          , (c.price * b.quantity) AS cost
+        FROM order_mt a
+        	INNER JOIN order_dt b ON a.idx = b.idx
+            INNER JOIN game c ON b.game_idx = c.idx
         WHERE a.member_idx = #{memberIdx}
-        ORDER BY a.idx DESC
+        ORDER BY b.sno DESC
     </select>
     
     <!-- 3. 주문 전체 금액 -->
     <select id="sumCost" resultType="int">
-        SELECT IFNULL(SUM(price * quantity), 0) AS cost
-        FROM order a
-        	INNER JOIN game b ON a.game_idx = b.idx 
-        WHERE a.member_idx = #{memberIdx}
+        SELECT IFNULL(SUM(c.price * b.quantity), 0) AS cost
+        FROM order_mt a
+        	INNER JOIN order_dt b ON a.idx = b.idx
+            INNER JOIN game c ON b.game_idx = c.idx 
+        WHERE a.idx = #{idx}
     </select>
     
     <!-- 4. 주문 수정 -->
-    <update id="updateOrder">
-        UPDATE order    
-        SET quantity = #{quantity} 
-        WHERE member_idx= #{memberIdx} 
-        AND game_idx = #{gameIdx}
+    <update id="updateOrderMt">
+        UPDATE order_mt
+        SET addr = #{addr}
+          , phone = #{phone}
+          , payment_type = #{payment_type}
+        WHERE idx = #{idx}
+    </update>
+    
+    <update id="updateOrderDt">
+    	UPDATE order_dt
+    	SET quantity = #{quantity}
+    	WHERE idx = #{idx}
+    	AND sno = #{sno}
     </update>
     
     <!-- 5. 주문 삭제 -->
-    <delete id="deleteOrder">
-        DELETE FROM order 
-        WHERE idx = #{orderIdx}
+    <delete id="deleteOrderMt">
+        DELETE FROM order_mt
+        WHERE idx = #{idx}
     </delete>
     
-    <!-- 6. 주문에 동일한 상품 레코드 확인 -->
-    <select id="countOrder" resultType="int">
-        SELECT COUNT(*)
-        FROM order
-        WHERE member_idx= #{memberIdx}
-        AND game_idx = #{gameIdx}
-    </select>
+	<delete id="deleteOrderDt">
+        DELETE FROM order_dt
+        WHERE idx = #{idx}
+		<if test="sno != null">
+		AND sno = #{sno}
+		</if>
+    </delete>
     
-    <!-- 7. 주문에 동일한 상품이 존재하면 수정 -->
-    <update id="duplicateUpdateOrder">
-        UPDATE order 
-        SET quantity = quantity + #{quantity} 
-        WHERE member_idx= #{memberIdx} 
-        AND game_idx = #{gameIdx}
-    </update>
 </mapper>
