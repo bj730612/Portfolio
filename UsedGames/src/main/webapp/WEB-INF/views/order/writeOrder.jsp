@@ -21,47 +21,59 @@
 	</div>
 </header>
 <body style="margin: auto; width: 900px;">
-       <form name="form1" id="form1" method="get" action="/order/insertOrder.do">
-           <table border="1">
-               <tr>
-                   <th>상품명</th>
-                   <th>단가</th>
-                   <th>수량</th>
-                   <th>금액</th>
-                   <th>취소</th>
-               </tr>
-<%--                <c:forEach var="gameVO" items="${gameVO}" varStatus="i"> --%>
-               <tr>
-                   <td>
-                        ${gameVO[0].title}
-                   </td>
-                   <td style="width: 80px" align="right">
-                       <input value="${gameVO[0].price}"/>
-                   </td>
-                   <td>
-                       <input type="number" style="width: 40px" name="quantity" value="${quantity}" min="1">
-                       <input type="hidden" name="gameIdx" value="${gameVO[0].idx}">
-                   </td>
-                   <td style="width: 100px" align="right">
-                       <input value="(${gameVO[0].price} * ${quantity})"/>
-                   </td>
-                   <td>
-                       <a href="/order/deleteOrder.do?OrderIdx=${gameVO[0].idx}">삭제</a>
-                   </td>
-               </tr>
+	<form name="form1" id="form1" method="GET" action="/order/insertOrder.do">
+		<table border="1">
+			<tr>
+				<th>상품명</th>
+				<th>단가</th>
+				<th>수량</th>
+				<th>금액</th>
+				<th>취소</th>
+			</tr>
+<%-- 			<c:forEach var="gameVO" items="${gameVO}" varStatus="i"> --%>
+			<tr>
+				<td>
+					${gameVO[0].title}
+				</td>
+				<td style="width: 80px" align="right">
+					<input value="${gameVO[0].price}"/>
+				</td>
+				<td>
+					<input type="number" style="width: 40px" name="quantity" value="${quantity}" min="1">
+					<input type="hidden" name="gameIdx" value="${gameVO[0].idx}">
+				</td>
+				<td style="width: 100px" align="right">
+					<input value="${gameVO[0].price}"/>
+				</td>
+				<td>
+					<a href="/order/deleteOrder.do?OrderIdx=${gameVO[0].idx}">삭제</a>
+				</td>
+			</tr>
 <%--                </c:forEach> --%>
-               <tr>
-                   <td colspan="5" align="right">
-                       장바구니 금액 합계 : <input value="${cost}"/><br>
-                       배송료 : ${fee}<br>
-                       전체 주문금액  :<input value="${allSum}"/>
-                   </td>
-               </tr>
-           </table>
-           <input type="hidden" name="count" value="${count}">
-           <button type="submit" id="btnUpdate">수정</button>
-       </form>
-   <a href="/cart/cartList.do"><button type="button" id="btnList">상품목록</button></a>
+			<tr>
+				<td colspan="5" align="right">
+				장바구니 금액 합계 : <input value="${cost}"/><br>
+				배송료 : ${fee}<br>
+				전체 주문금액  :<input value="${allSum}"/>
+				</td>
+			</tr>
+		</table>
+		<div>
+			결제방법 선택 <select name="idx">
+				<option>선택</option>
+				<c:forEach var="paymentType" items="${paymentTypes}">
+					<option value="${paymentType.idx}">${paymentType.name}</option>
+				</c:forEach>
+			</select>
+		</div>
+		주소 <input type="text" name="addr">
+		<br>
+		전화번호 <input type="text" name="phone">
+		<br>
+		<br><br><br><br>
+		<input type="submit" value="주문">
+	</form>
+<a href="/main.do">취소</a>
 <!-- 	<div> -->
 <!-- 		<p>장바구니</p> -->
 <!-- 		<table class="table"> -->

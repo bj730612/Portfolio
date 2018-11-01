@@ -88,4 +88,8 @@
 		</if>
     </delete>
     
+    <select id="selectPaymentType" resultType="PaymentTypeVO">
+		SELECT * FROM Payment_type
+	</select>
+    
 </mapper>

@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 import org.zerock.domain.OrderVO;
+import org.zerock.domain.PaymentTypeVO;
 
 @Repository
 public class OrderDAOImpl implements OrderDAO {
@@ -52,9 +53,15 @@ public class OrderDAOImpl implements OrderDAO {
     public int countOrder(OrderVO orderVO) {
         return sqlSession.selectOne(NAMESPACE + ".countOrder", orderVO);
     }
+    
     //장바구니 상품수량 변경
     @Override
     public void duplicateUpdateOrder(OrderVO orderVO) {
         sqlSession.update(NAMESPACE + ".duplicateUpdateOrder", orderVO);
     }
+    
+	@Override
+	public List<PaymentTypeVO> selectPaymentType() throws Exception {
+		return sqlSession.selectList(NAMESPACE+".selectPaymentType");
+	}
 }

@@ -12,7 +12,7 @@
 <body>
 <form role="form" method="POST" enctype="multipart/form-data">
 	<div>
-		게시글 선택 <select name="postCategoryIdx">
+		게시글 선택 <select name="idx">
 			<c:forEach var="post" items="${posts}">
 				<option value="${post.idx}">${post.name}</option>
 			</c:forEach>

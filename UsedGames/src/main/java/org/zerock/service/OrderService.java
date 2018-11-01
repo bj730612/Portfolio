@@ -3,6 +3,7 @@ package org.zerock.service;
 import java.util.List;
 
 import org.zerock.domain.OrderVO;
+import org.zerock.domain.PaymentTypeVO;
 
 public interface OrderService {
 	
@@ -19,4 +20,7 @@ public interface OrderService {
 	public void duplicateUpdateOrder(OrderVO orderVO) throws Exception;
 
 	public int countOrder(OrderVO orderVO) throws Exception;
+	
+	public List<PaymentTypeVO> selectPaymentType() throws Exception;
+	
 }

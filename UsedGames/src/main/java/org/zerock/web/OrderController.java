@@ -27,7 +27,7 @@ public class OrderController {
     @Inject
     private GameService gameService;
     
-    @RequestMapping(value="writeOrder.do", method=RequestMethod.GET)
+    @RequestMapping(value="/writeOrder.do", method=RequestMethod.GET)
     public String writeOrder(Model model, @ModelAttribute GameVO gameVO, HttpServletRequest request) throws Exception{
     
     	HttpSession session = request.getSession();
@@ -36,10 +36,10 @@ public class OrderController {
     	gameVO.setIdx(gameIdx);
     	
     	List<GameVO> listGameVO = gameService.gameInfo(gameVO);
+    	model.addAttribute("paymentTypes", orderService.selectPaymentType());
     	
     	int quantity = Integer.parseInt(request.getParameter("quantity"));
     	int cost = quantity * listGameVO.get(0).getPrice();
-    	System.out.println(gameService.gameInfo(gameVO));
     	
     	model.addAttribute("gameVO", listGameVO);
     	model.addAttribute("quantity", request.getParameter("quantity"));
@@ -53,13 +53,12 @@ public class OrderController {
     }
 
     //장바구니 추가
-    @RequestMapping(value="insertOrder.do", method=RequestMethod.GET)
+    @RequestMapping(value="/insertOrder.do", method=RequestMethod.GET)
     public String insertOrder(@ModelAttribute OrderVO orderVO, HttpServletRequest request) throws Exception{
     	
     	HttpSession session = request.getSession();
     	MemberVO memberVO = (MemberVO)session.getAttribute("login");
 
-        System.out.println(3);
         return "redirect:orderList.do";
     }
 
@@ -67,10 +66,7 @@ public class OrderController {
     @RequestMapping(value="orderList.do", method=RequestMethod.GET)
     public String list(Model model, HttpServletRequest request) throws Exception{
     	
-    	System.out.println(2);
-    	
     	HttpSession session = request.getSession();
-    	
     	MemberVO memberVO = (MemberVO)session.getAttribute("login");
     	
     	int memberIdx = memberVO.getIdx();
@@ -86,13 +82,11 @@ public class OrderController {
         model.addAttribute("fee", fee);                 // 배송금액
         model.addAttribute("allSum", sumCost+fee);    // 주문 상품 전체 금액
         
-        System.out.println(1);
-        
         return "/member/orderList";
     }
 
     // 3. 장바구니 삭제
-    @RequestMapping(value="deleteOrder.do", method=RequestMethod.GET)
+    @RequestMapping(value="/deleteOrder.do", method=RequestMethod.GET)
     public String delete(@RequestParam int orderIdx) throws Exception{
         orderService.deleteOrder(orderIdx);
         
@@ -100,7 +94,7 @@ public class OrderController {
     }
 
     // 4. 장바구니 수정
-    @RequestMapping(value="updateOrder.do", method=RequestMethod.GET)
+    @RequestMapping(value="/updateOrder.do", method=RequestMethod.GET)
     public String updateOrder(@RequestParam int[] quantity, @RequestParam int[] gameIdx, HttpServletRequest request) throws Exception {
         // session의 id
     	HttpSession session = request.getSession();
