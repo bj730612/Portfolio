@@ -17,8 +17,13 @@ public class OrderServiceImpl implements OrderService {
 
     //장바구니 추가
     @Override
-    public void insertOrder(OrderVO orderVO) throws Exception {
-        orderDAO.insertOrder(orderVO);
+    public void insertOrderMt(OrderVO orderVO) throws Exception {
+        orderDAO.insertOrderMt(orderVO);
+    }
+    
+    @Override
+    public void insertOrderDt(OrderVO orderVO) throws Exception {
+        orderDAO.insertOrderDt(orderVO);
     }
     
     //장바구니 목록

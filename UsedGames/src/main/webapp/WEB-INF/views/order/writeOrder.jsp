@@ -21,7 +21,7 @@
 	</div>
 </header>
 <body style="margin: auto; width: 900px;">
-	<form name="form1" id="form1" method="GET" action="/order/insertOrder.do">
+	<form name="form1" id="form1" method="GET" action="/order/insertOrderMt.do">
 		<table border="1">
 			<tr>
 				<th>상품명</th>
@@ -30,7 +30,6 @@
 				<th>금액</th>
 				<th>취소</th>
 			</tr>
-<%-- 			<c:forEach var="gameVO" items="${gameVO}" varStatus="i"> --%>
 			<tr>
 				<td>
 					${gameVO[0].title}
@@ -49,17 +48,16 @@
 					<a href="/order/deleteOrder.do?OrderIdx=${gameVO[0].idx}">삭제</a>
 				</td>
 			</tr>
-<%--                </c:forEach> --%>
 			<tr>
 				<td colspan="5" align="right">
-				장바구니 금액 합계 : <input value="${cost}"/><br>
+				주문 금액 합계 : <input value="${cost}"/><br>
 				배송료 : ${fee}<br>
-				전체 주문금액  :<input value="${allSum}"/>
+				결제 금액  :<input value="${allSum}"/>
 				</td>
 			</tr>
 		</table>
 		<div>
-			결제방법 선택 <select name="idx">
+			결제방법 선택 <select name="paymentTypeIdx">
 				<option>선택</option>
 				<c:forEach var="paymentType" items="${paymentTypes}">
 					<option value="${paymentType.idx}">${paymentType.name}</option>
@@ -70,7 +68,6 @@
 		<br>
 		전화번호 <input type="text" name="phone">
 		<br>
-		<br><br><br><br>
 		<input type="submit" value="주문">
 	</form>
 <a href="/main.do">취소</a>

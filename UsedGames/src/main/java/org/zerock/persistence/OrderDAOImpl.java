@@ -17,10 +17,14 @@ public class OrderDAOImpl implements OrderDAO {
     
     private static final String NAMESPACE = "org.zerock.mapper.OrderMapper";
 
-    //장바구니 추가    
     @Override
-	public void insertOrder(OrderVO orderVO) throws Exception {
-		sqlSession.insert(NAMESPACE+".insertOrder", orderVO);
+	public void insertOrderMt(OrderVO orderVO) throws Exception {
+		sqlSession.insert(NAMESPACE+".insertOrderMt", orderVO);
+	}
+    
+    @Override
+	public void insertOrderDt(OrderVO orderVO) throws Exception {
+		sqlSession.insert(NAMESPACE+".insertOrderDt", orderVO);
 	}
     
     //장바구니 목록

@@ -6,6 +6,8 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,15 +23,15 @@ import org.zerock.service.OrderService;
 @RequestMapping("/order")
 @Controller
 public class OrderController {
-
+	
     @Inject
     private OrderService orderService;
     @Inject
     private GameService gameService;
     
     @RequestMapping(value="/writeOrder.do", method=RequestMethod.GET)
-    public String writeOrder(Model model, @ModelAttribute GameVO gameVO, HttpServletRequest request) throws Exception{
-    
+    public void writeOrder(Model model, @ModelAttribute GameVO gameVO, HttpServletRequest request) throws Exception{
+    	
     	HttpSession session = request.getSession();
     	MemberVO memberVO = (MemberVO)session.getAttribute("login");
     	int gameIdx = Integer.parseInt(request.getParameter("gameIdx"));
@@ -47,14 +49,22 @@ public class OrderController {
     	
     	int fee = cost >= 100000 ? 0 : 2500;
         model.addAttribute("fee", fee);                 // 배송금액
-        model.addAttribute("allSum", cost+fee);    // 주문 상품 전체 금액    	
-	
-    	return "/order/writeOrder";
+        model.addAttribute("allSum", cost+fee);    // 주문 상품 전체 금액
+        
     }
 
-    //장바구니 추가
-    @RequestMapping(value="/insertOrder.do", method=RequestMethod.GET)
-    public String insertOrder(@ModelAttribute OrderVO orderVO, HttpServletRequest request) throws Exception{
+    //추가
+    @RequestMapping(value="/insertOrderMt.do", method=RequestMethod.GET)
+    public String insertOrderMt(@ModelAttribute OrderVO orderVO, HttpServletRequest request) throws Exception{
+    	
+    	HttpSession session = request.getSession();
+    	MemberVO memberVO = (MemberVO)session.getAttribute("login");
+    	
+        return "redirect:insertOrderDt.do";
+    }
+    
+    @RequestMapping(value="/insertOrderDt.do", method=RequestMethod.GET)
+    public String insertOrderDt(@ModelAttribute OrderVO orderVO, HttpServletRequest request) throws Exception{
     	
     	HttpSession session = request.getSession();
     	MemberVO memberVO = (MemberVO)session.getAttribute("login");
@@ -62,7 +72,7 @@ public class OrderController {
         return "redirect:orderList.do";
     }
 
-    //장바구니 목록
+    //목록
     @RequestMapping(value="orderList.do", method=RequestMethod.GET)
     public String list(Model model, HttpServletRequest request) throws Exception{
     	
@@ -85,7 +95,7 @@ public class OrderController {
         return "/member/orderList";
     }
 
-    // 3. 장바구니 삭제
+    //삭제
     @RequestMapping(value="/deleteOrder.do", method=RequestMethod.GET)
     public String delete(@RequestParam int orderIdx) throws Exception{
         orderService.deleteOrder(orderIdx);
@@ -93,7 +103,7 @@ public class OrderController {
         return "redirect:orderList.do";
     }
 
-    // 4. 장바구니 수정
+    //수정
     @RequestMapping(value="/updateOrder.do", method=RequestMethod.GET)
     public String updateOrder(@RequestParam int[] quantity, @RequestParam int[] gameIdx, HttpServletRequest request) throws Exception {
         // session의 id

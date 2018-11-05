@@ -7,7 +7,9 @@ import org.zerock.domain.PaymentTypeVO;
 
 public interface OrderDAO {
 	
-	public void insertOrder(OrderVO orderVO) throws Exception;
+	public void insertOrderMt(OrderVO orderVO) throws Exception;
+	
+	public void insertOrderDt(OrderVO orderVO) throws Exception;
 	
 	public void updateOrder(OrderVO orderVO) throws Exception;
 	

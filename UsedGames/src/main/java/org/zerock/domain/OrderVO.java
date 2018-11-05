@@ -1,39 +1,30 @@
 package org.zerock.domain;
 
+import java.util.Date;
+
 public class OrderVO {
 
-	private int idx;
+	private int mtIdx;
+	private int dtIdx;
 	private int quantity;
-	private int memberIdx;
 	private int gameIdx;
-	private int boardIdx;
-	private String gameTitle;
-	private int price;
-	private int cost;
+	private int sno;	
+	private int memberIdx;
+	private String addr;
+	private int phone;
+	private Date orderDate;
 	
-	public int getCost() {
-		return cost;
+	public int getMtIdx() {
+		return mtIdx;
 	}
-	public void setCost(int cost) {
-		this.cost = cost;
+	public void setMtIdx(int mtIdx) {
+		this.mtIdx = mtIdx;
 	}
-	public String getGameTitle() {
-		return gameTitle;
+	public int getDtIdx() {
+		return dtIdx;
 	}
-	public void setGameTitle(String gameTitle) {
-		this.gameTitle = gameTitle;
-	}
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
-		this.price = price;
-	}
-	public int getIdx() {
-		return idx;
-	}
-	public void setIdx(int idx) {
-		this.idx = idx;
+	public void setDtIdx(int dtIdx) {
+		this.dtIdx = dtIdx;
 	}
 	public int getQuantity() {
 		return quantity;
@@ -41,23 +32,41 @@ public class OrderVO {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	public int getMemberIdx() {
-		return memberIdx;
-	}
-	public void setMemberIdx(int memberIdx) {
-		this.memberIdx = memberIdx;
-	}
 	public int getGameIdx() {
 		return gameIdx;
 	}
 	public void setGameIdx(int gameIdx) {
 		this.gameIdx = gameIdx;
 	}
-	public int getBoardIdx() {
-		return boardIdx;
+	public int getSno() {
+		return sno;
 	}
-	public void setBoardIdx(int boardIdx) {
-		this.boardIdx = boardIdx;
+	public void setSno(int sno) {
+		this.sno = sno;
 	}
-
+	public int getMemberIdx() {
+		return memberIdx;
+	}
+	public void setMemberIdx(int memberIdx) {
+		this.memberIdx = memberIdx;
+	}
+	public String getAddr() {
+		return addr;
+	}
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+	public int getPhone() {
+		return phone;
+	}
+	public void setPhone(int phone) {
+		this.phone = phone;
+	}
+	public Date getOrderDate() {
+		return orderDate;
+	}
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
+	}
+		
 }
