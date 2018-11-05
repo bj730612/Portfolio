@@ -21,7 +21,7 @@
 	</div>
 </header>
 <body style="margin: auto; width: 900px;">
-	<form name="form1" id="form1" method="GET" action="/order/insertOrderMt.do">
+	<form name="form1" id="form1" method="GET" action="/order/insertOrder.do">
 		<table border="1">
 			<tr>
 				<th>상품명</th>

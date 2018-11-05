@@ -4,21 +4,49 @@ import java.util.Date;
 
 public class OrderVO {
 
-	private int mtIdx;
+	private int idx;
 	private int dtIdx;
 	private int quantity;
 	private int gameIdx;
 	private int sno;	
 	private int memberIdx;
 	private String addr;
+	private String gameTitle;
+	private int price;
 	private int phone;
+	private int cost;
 	private Date orderDate;
+	private int paymentTypeIdx;
 	
-	public int getMtIdx() {
-		return mtIdx;
+	public int getIdx() {
+		return idx;
 	}
-	public void setMtIdx(int mtIdx) {
-		this.mtIdx = mtIdx;
+	public void setIdx(int idx) {
+		this.idx = idx;
+	}
+	public int getCost() {
+		return cost;
+	}
+	public void setCost(int cost) {
+		this.cost = cost;
+	}
+	public String getGameTitle() {
+		return gameTitle;
+	}
+	public void setGameTitle(String gameTitle) {
+		this.gameTitle = gameTitle;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public int getPaymentTypeIdx() {
+		return paymentTypeIdx;
+	}
+	public void setPaymentTypeIdx(int paymentTypeIdx) {
+		this.paymentTypeIdx = paymentTypeIdx;
 	}
 	public int getDtIdx() {
 		return dtIdx;

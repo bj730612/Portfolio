@@ -1,6 +1,7 @@
 package org.zerock.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -23,8 +24,13 @@ public class OrderDAOImpl implements OrderDAO {
 	}
     
     @Override
-	public void insertOrderDt(OrderVO orderVO) throws Exception {
-		sqlSession.insert(NAMESPACE+".insertOrderDt", orderVO);
+	public void insertOrderDt(Map<String, Object> listOrderVO) throws Exception {
+		sqlSession.insert(NAMESPACE+".insertOrderDt", listOrderVO);
+	}
+    
+    @Override
+	public int selectOrderMtLastIdx(OrderVO orderVO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+".selectOrderMtLastIdx", orderVO);
 	}
     
     //장바구니 목록

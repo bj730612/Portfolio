@@ -11,26 +11,33 @@
         	member_idx
           , addr
           , phone
-          , payment_type )
+          , payment_type_idx )
         VALUES (
         	#{memberIdx}
 		  , #{addr}
 		  , #{phone}
-		  , #{paymentType} )
+		  , #{paymentTypeIdx} )
     </insert>
     
-    <insert id="insertOrderDt" parameterType="java.util.List">
+    <insert id="insertOrderDt" parameterType="java.util.Map">
     	INSERT INTO order_dt (
-    		sno
+    		idx
+    	  , sno
     	  , game_idx
     	  , quantity )
 		VALUES 
-		<foreach item="item" index="index" collection="list" open="(" separator="),(" close=")">
-			#{item.sno}
-			, #{item.game_idx}
-			, #{item.quantity}
+		<foreach item="item" index="index" collection="listOrderVO" open="(" separator="),(" close=")">
+			#{item.dtIdx}
+		  , #{item.sno}
+		  , #{item.gameIdx}
+		  , #{item.quantity}
 		</foreach>
     </insert>
+    
+    <select id="selectOrderMtLastIdx" resultType="int">
+    	SELECT MAX(idx) FROM order_mt
+    	WHERE member_idx = #{memberIdx}
+    </select>
     
     <!-- 2. 주문 목록 -->
     <select id="listOrder" resultType="OrderVO">

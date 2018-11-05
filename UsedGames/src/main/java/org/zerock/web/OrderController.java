@@ -1,12 +1,15 @@
 package org.zerock.web;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +27,8 @@ import org.zerock.service.OrderService;
 @Controller
 public class OrderController {
 	
+	private static final Logger log = LoggerFactory.getLogger(OrderController.class);
+	
     @Inject
     private OrderService orderService;
     @Inject
@@ -31,6 +36,11 @@ public class OrderController {
     
     @RequestMapping(value="/writeOrder.do", method=RequestMethod.GET)
     public void writeOrder(Model model, @ModelAttribute GameVO gameVO, HttpServletRequest request) throws Exception{
+    	
+    	log.info("info");
+    	log.debug("debug");
+    	log.warn("warn");
+    	log.error("error");
     	
     	HttpSession session = request.getSession();
     	MemberVO memberVO = (MemberVO)session.getAttribute("login");
@@ -54,21 +64,36 @@ public class OrderController {
     }
 
     //추가
-    @RequestMapping(value="/insertOrderMt.do", method=RequestMethod.GET)
-    public String insertOrderMt(@ModelAttribute OrderVO orderVO, HttpServletRequest request) throws Exception{
+    @RequestMapping(value="/insertOrder.do", method=RequestMethod.GET)
+    public String insertOrderMt(@ModelAttribute OrderVO orderVO, HttpServletRequest request, Model model) throws Exception{
     	
     	HttpSession session = request.getSession();
     	MemberVO memberVO = (MemberVO)session.getAttribute("login");
+    	int paymentTypeIdx = Integer.parseInt(request.getParameter("paymentTypeIdx"));
     	
-        return "redirect:insertOrderDt.do";
-    }
-    
-    @RequestMapping(value="/insertOrderDt.do", method=RequestMethod.GET)
-    public String insertOrderDt(@ModelAttribute OrderVO orderVO, HttpServletRequest request) throws Exception{
+    	orderVO.setMemberIdx(memberVO.getIdx());
+    	orderVO.setPaymentTypeIdx(paymentTypeIdx);
+    	orderVO.setGameIdx(Integer.parseInt(request.getParameter("gameIdx")));
+    	orderService.insertOrderMt(orderVO);
     	
-    	HttpSession session = request.getSession();
-    	MemberVO memberVO = (MemberVO)session.getAttribute("login");
-
+    	int lastIdx = orderService.selectOrderMtLastIdx(orderVO);
+    	System.out.println(lastIdx);
+    	orderVO.setDtIdx(lastIdx);
+    	
+    	List<OrderVO> listOrderVO = new ArrayList();
+    	orderVO.setSno(1);
+    	listOrderVO.add(orderVO);
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	
+    	map.put("listOrderVO", listOrderVO);
+    	
+    	System.out.println("list size " + listOrderVO.size());
+    	
+    	orderService.insertOrderDt(map);
+    	
+    	
+    	//model.addAttribute("listOrderVO", listOrderVO);
+    	
         return "redirect:orderList.do";
     }
 

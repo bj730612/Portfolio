@@ -1,6 +1,7 @@
 package org.zerock.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import org.zerock.domain.OrderVO;
 import org.zerock.domain.PaymentTypeVO;
@@ -9,10 +10,12 @@ public interface OrderDAO {
 	
 	public void insertOrderMt(OrderVO orderVO) throws Exception;
 	
-	public void insertOrderDt(OrderVO orderVO) throws Exception;
+	public void insertOrderDt(Map<String, Object> listOrderVO) throws Exception;
+	
+	public int selectOrderMtLastIdx(OrderVO orderVO) throws Exception;
 	
 	public void updateOrder(OrderVO orderVO) throws Exception;
-	
+	 
 	public void deleteOrder(int idx) throws Exception;
 	
 	public List<OrderVO> listOrder(int memberIdx) throws Exception;

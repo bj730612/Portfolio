@@ -1,6 +1,7 @@
 package org.zerock.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -22,8 +23,13 @@ public class OrderServiceImpl implements OrderService {
     }
     
     @Override
-    public void insertOrderDt(OrderVO orderVO) throws Exception {
-        orderDAO.insertOrderDt(orderVO);
+    public void insertOrderDt(Map<String, Object> listOrderVO) throws Exception {
+        orderDAO.insertOrderDt(listOrderVO);
+    }
+    
+    @Override
+    public int selectOrderMtLastIdx(OrderVO orderVO) throws Exception {
+        return orderDAO.selectOrderMtLastIdx(orderVO);
     }
     
     //장바구니 목록
