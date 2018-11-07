@@ -23,7 +23,7 @@
     <h2>주문 확인</h2>
     <c:choose>
         <c:when test="${map.count == 0}">
-            주문가 비어있습니다.
+            주문이 비어있습니다.
         </c:when>
         <c:otherwise>
         <form name="form1" id="form1" method="get" action="/order/updateOrder.do">

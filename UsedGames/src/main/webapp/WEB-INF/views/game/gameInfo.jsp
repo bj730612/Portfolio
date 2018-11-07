@@ -21,10 +21,10 @@
 <script>
 function btn(val) {
 	var frm = document.form
-	if (val == 1) {
+	if (val == "cart") {
 		frm.action="/cart/insertCart.do";
 		frm.submit();
-	} else if (val == 2) {
+	} else if (val == "order") {
 		frm.action="/order/writeOrder.do";
 		frm.submit();
 	}
@@ -60,8 +60,8 @@ function btn(val) {
 								<option value="${i}">${i}</option>
 							</c:forEach>
 						</select>&nbsp;개
-						<input type="button" value="장바구니" onclick="btn(1);">
-						<input type="button" value="주문하기" onclick="btn(2);">
+						<input type="button" value="장바구니" onclick="btn('cart');">
+						<input type="button" value="주문하기" onclick="btn('order');">
 					</form>
 				</div>
 			</div>

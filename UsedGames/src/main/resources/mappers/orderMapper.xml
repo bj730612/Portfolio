@@ -89,7 +89,7 @@
     
 	<delete id="deleteOrderDt">
         DELETE FROM order_dt
-        WHERE idx = #{idx}
+        WHERE idx = #{dtIdx}
 		<if test="sno != null">
 		AND sno = #{sno}
 		</if>

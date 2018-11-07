@@ -9,8 +9,6 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,8 +25,6 @@ import org.zerock.service.OrderService;
 @Controller
 public class OrderController {
 	
-	private static final Logger log = LoggerFactory.getLogger(OrderController.class);
-	
     @Inject
     private OrderService orderService;
     @Inject
@@ -36,11 +32,6 @@ public class OrderController {
     
     @RequestMapping(value="/writeOrder.do", method=RequestMethod.GET)
     public void writeOrder(Model model, @ModelAttribute GameVO gameVO, HttpServletRequest request) throws Exception{
-    	
-    	log.info("info");
-    	log.debug("debug");
-    	log.warn("warn");
-    	log.error("error");
     	
     	HttpSession session = request.getSession();
     	MemberVO memberVO = (MemberVO)session.getAttribute("login");

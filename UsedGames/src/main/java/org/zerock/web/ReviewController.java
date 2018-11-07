@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.zerock.domain.ReviewVO;
 import org.zerock.domain.MemberVO;
+import org.zerock.domain.ReviewVO;
 import org.zerock.service.ReviewService;
 
 @RestController
@@ -74,20 +74,15 @@ public class ReviewController{
         return new ResponseEntity(json.toString(), responseHeaders, HttpStatus.CREATED);
 	}
 	
-//	@RequestMapping(value="/deleteBoard.do", method=RequestMethod.POST)
-//	public String deleteBoard(@RequestParam("boardIdx") int idx, RedirectAttributes rttr) throws Exception {
-//		
-//		//게시글 삭제 후 "SUCCESS메세지 보내기
-//		boardService.deleteBoard(idx);
-//		rttr.addFlashAttribute("msg", "SUCCESS");
-//		
-//		return "redirect:/board/listAll.do";
-//	}
-//	
-//	//게시글 수정
-//	@RequestMapping(value="/updateReview.do", method=RequestMethod.GET)
-//	public void updateReview(@RequestParam("idx") int idx, Model model) throws Exception {
-//		
-//		model.addAttribute(ReviewService.readReview(idx));
-//	}
+	@RequestMapping(value="/deleteReview.do", method=RequestMethod.POST)
+	public void deleteReview(@RequestParam("idx") int idx) throws Exception {
+		
+		reviewService.deleteReview(idx);
+	}
+	
+	//게시글 수정
+	@RequestMapping(value="/updateReview.do", method=RequestMethod.GET)
+	public void updateReview(@RequestParam("idx") int idx, Model model) throws Exception {
+		
+	}
 }

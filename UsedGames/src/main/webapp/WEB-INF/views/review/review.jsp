@@ -38,6 +38,20 @@ function add_review(boardIdx) {
 	}
 }
 
+function remove_review(idx) {
+	$.ajax({
+		type : "POST",
+		url : "/review/deleteReview.do",
+		dataType : "JSON",
+		data : $("reviewForm").serialize(),
+		complete : function(data) {
+			if (data == "success") {
+				getReviewList();
+			}
+		}
+	})
+}
+
 $(function() {
 	getReviewList();
 });
@@ -57,6 +71,9 @@ function getReviewList() {
 					html += "<div><table class='table'><h6><strong>"+ data[i].name + "</strong></h6>";
 					html += data[i].content+ "<tr><td></td></tr>";
 					html += "</table></div>";
+// 					if (data[i].idx == memberVO.idx) {
+// 						html += "<div><a href='#' onClick='remove_review(" + data[i].idx + ")' class='btn pull-right btn-success'>평가 등록</a></div>"
+// 					}
 					html += "</div>";
 				}
 			} else {
@@ -71,7 +88,7 @@ function getReviewList() {
 		error : function(request, status, error) {
 			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		}
-						
+		
 	});
 }
 </script>

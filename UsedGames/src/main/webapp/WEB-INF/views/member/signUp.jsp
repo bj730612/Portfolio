@@ -67,7 +67,6 @@ body {
 form {
 	display: flex;
 	flex-direction: column;
-	padding-left: 200px;
 	width: 900px;
 	margin: auto;
 }
@@ -83,18 +82,19 @@ form {
 		<a href="/main.do"><img style="width: 200px;" id="main-img"
 			src="../resources/uploadFile/image/ps.png"></a>
 	</div>
-
-	<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-		<li class="nav-item"><a class="nav-link active"
-			id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
-			aria-controls="pills-home" aria-selected="true">1.약관동의</a></li>
-		<li class="nav-item"><a class="nav-link" id="pills-profile-tab"
-			data-toggle="pill" href="#pills-profile" role="tab"
-			aria-controls="pills-profile" aria-selected="false">2.가입방법 선택</a></li>
-		<li class="nav-item"><a class="nav-link" id="pills-contact-tab"
-			data-toggle="pill" href="#pills-contact" role="tab"
-			aria-controls="pills-contact" aria-selected="false">3.정보 입력</a></li>
-	</ul>
+	<div class="d-flex" style="margin : 0 auto;">
+		<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+			<li class="nav-item"><a class="nav-link active"
+				id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+				aria-controls="pills-home" aria-selected="true">1.약관동의</a></li>
+			<li class="nav-item"><a class="nav-link" id="pills-profile-tab"
+				data-toggle="pill" href="#pills-profile" role="tab"
+				aria-controls="pills-profile" aria-selected="false">2.가입방법 선택</a></li>
+			<li class="nav-item"><a class="nav-link" id="pills-contact-tab"
+				data-toggle="pill" href="#pills-contact" role="tab"
+				aria-controls="pills-contact" aria-selected="false">3.정보 입력</a></li>
+		</ul>
+	</div>
 
 	<div class="tab-content" id="pills-tabContent">
 		<div class="tab-pane fade show active" id="pills-home" role="tabpanel"

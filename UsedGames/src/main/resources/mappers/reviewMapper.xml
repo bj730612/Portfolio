@@ -28,7 +28,7 @@
 	
 <!-- 수정 -->
 	<update id="updateReview">
-		UPDATE board SET content = #{content}
+		UPDATE review SET content = #{content}
 		WHERE idx = #{idx} AND member_idx = #{memberIdx}
 	</update>
 
