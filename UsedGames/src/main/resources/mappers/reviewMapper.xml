@@ -19,7 +19,7 @@
 
 <!-- 리스트 -->
 	<select id="selectReview" resultType="ReviewVO">
-		SELECT a.name, b.content, b.write_date
+		SELECT a. idx, a.name, b.content, b.write_date
 		FROM member a
 			INNER JOIN review b ON a.idx = b.member_idx
 		WHERE b.board_idx = #{boardIdx}

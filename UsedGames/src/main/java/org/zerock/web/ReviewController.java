@@ -33,7 +33,7 @@ public class ReviewController{
 	//�뙎湲� �벑濡�
 	@RequestMapping(value="/insertReview.do", method=RequestMethod.POST)
 	@ResponseBody
-	public String insertReview(ReviewVO reviewVO, @RequestParam("boardIdx") int boardIdx, HttpServletRequest request) throws Exception {
+	public String insertReview(Model model, ReviewVO reviewVO, @RequestParam("boardIdx") int boardIdx, HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();
 		
@@ -56,7 +56,11 @@ public class ReviewController{
 		
 		HttpHeaders responseHeaders = new HttpHeaders();
         ArrayList<HashMap> hmlist = new ArrayList<HashMap>();
+        HttpSession session = request.getSession();
         
+        MemberVO memberVO = (MemberVO)session.getAttribute("login");
+        int idx = memberVO.getIdx();
+                
         List<ReviewVO> reviewVO = reviewService.selectReview(boardIdx);
         
         if(reviewVO.size() > 0) {

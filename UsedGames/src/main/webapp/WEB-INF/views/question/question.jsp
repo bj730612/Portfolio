@@ -28,11 +28,6 @@ function add_question(boardIdx) {
 					alert(memberVO);
 					getQuestionList();
 				}
-			},
-			error : function() {
-				alert("상품평이 등록 되었습니다.2");
-				getQuestionList();
-				$("#content").val("");
 			}
 		});	
 	}

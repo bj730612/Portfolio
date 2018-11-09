@@ -76,8 +76,8 @@ public class GameController {
 		gameVO.setDeviceIdx(deviceIdxList);
 		gameVO.setTypeIdx(typeIdxList);
 
-//		List list = (List)gameService.categoryGameList(gameVO);
-//
+		List list = (List)gameService.categoryGameList(gameVO);
+
 //		for (int i = 0; i < list.size(); i++) {
 //			Map tmp_map = (Map) list.get(i);
 //			String title = (String) tmp_map.get("title");
